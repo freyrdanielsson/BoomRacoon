@@ -1,0 +1,52 @@
+$max-width: 1400px;
+$gutter: 30px;
+
+$font-main:
+    'Open Sans',
+    helvetica,
+    arial,
+    sans-serif;
+
+$font-heading: 'Oswald',
+    georgia,
+    serif;
+
+// 'random' colors for now
+$color-font: #222;
+$color-background: #e1e1e1;
+$color-gray: #ccc;
+$color-invalid: #4e1d04;
+
+$transition: 250ms ease-in-out;
+
+@mixin container() {
+    max-width: $max-width;
+    margin: 0 auto;
+    margin-bottom: $gutter * 2;
+
+    @media (max-width: $max-width - 1) {
+        padding-right: $gutter;
+        padding-left: $gutter;
+    }
+}
+
+// Might want to use this or just use display grid
+// but last time I checked display grid wasn't supported
+// in all browser so this does the same thing...
+@mixin row() {
+    display: flex;
+
+    margin-right: -($gutter / 2);
+    margin-left: -($gutter / 2);
+}
+
+@mixin columns($col: 1) {
+    width: ($col / 12 * 100) * 1%;
+
+    padding-right: $gutter / 2;
+    padding-left: $gutter / 2;
+}
+
+@mixin offset-left($cols: 0) {
+    margin-left: ($cols/12 * 100) * 1%;
+}

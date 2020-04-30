@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
-function App() {
+// import components
+
+// import routes
+import Home from './routes/home/Home';
+
+import './App.scss';
+
+
+function App(props) {
+  // likely want to access authentication status here as well
+  const { location } = props;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Fragment>
+      {/* This is a nice package for controlling the title of the page */}
+      <Helmet defaultTitle='BinGo' titleTemplate='%s - BinGo' />
+
+      <main className='app'>
+        <Switch location={location}>
+          <Route exact path='/' component={Home} />
+        </Switch>
+      </main>
+    </Fragment>
+
+  )
 }
 
-export default App;
+// this is an example if we have a reducer called auth that has
+// a state variable isAuthenticated. Then this is how we connect it
+// to this components props
+const mapStateToProps = (state) => {
+  return {
+    /* isAuthenticated: state.auth.isAuthenticated, */
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(App));
