@@ -1,0 +1,32 @@
+@import '../../config.scss';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $gutter * 2;
+
+    &__title {
+        padding: $gutter / 4;
+        text-transform: uppercase;
+    }
+
+    &__list {
+        display: flex;
+        list-style: none;
+    }
+
+    &__item {
+        margin-right: $gutter / 2;
+    }
+
+    &__link {
+        &--selected {
+            text-decoration: underline;
+        }
+    }
+
+    &__nav {
+        display: flex;
+        align-items: center;
+    }
+}
