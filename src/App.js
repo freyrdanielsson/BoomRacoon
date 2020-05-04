@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 // import components
+import Header from './components/header/Header';
+import Navigation from './components/navigation/Navigation';
 
 // import routes
 import Home from './routes/home/Home';
@@ -21,9 +23,11 @@ function App(props) {
       <Helmet defaultTitle='BinGo' titleTemplate='%s - BinGo' />
 
       <main className='app'>
-        <Switch location={location}>
-          <Route exact path='/' component={Home} />
-        </Switch>
+        <Header />
+          <Switch location={location}>
+            <Route exact path='/' component={Home} />
+          </Switch>
+        <Navigation />
       </main>
     </Fragment>
 
