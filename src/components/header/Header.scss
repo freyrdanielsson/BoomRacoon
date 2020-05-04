@@ -30,3 +30,33 @@
         align-items: center;
     }
 }
+.header-bar {
+    background-color: #027DEE !important;
+    top: 0;
+    width: 100%;
+    position: fixed;
+}
+.toolbar-bar {
+    padding: 2px !important;
+}
+.header-flex {
+    display: flex;
+    width: 100%;;
+}
+.header-flex-1 {
+    width: 20%;
+}
+.header-flex-2 {
+    width: 60%;
+    text-align: center;
+}
+.back-button {
+    height: 100% !important;
+}
+.back-button-icon {
+    //font-size: 2em;
+    color: white !important;
+}
+.MuiIconButton-label {
+    color: white !important
+}
