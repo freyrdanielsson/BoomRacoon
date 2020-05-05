@@ -10,7 +10,7 @@ export function ProfileForm(props) {
         <div className='edit-profile'>
             <Container component="main" maxWidth="md">
                 <div className="paper-paper">
-                    <Typography component="h1" variant="h5" className="login-title">
+                    <Typography component="h1" variant="h5" className="edit-profile-title">
                         Change profile info
                     </Typography>
                     <form className="profile-form" noValidate>
