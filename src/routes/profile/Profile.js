@@ -2,14 +2,14 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import './Matching.scss';
-import Match from '../../components/match/Match';
+import './Profile.scss';
+import OwnProfile from '../../components/ownProfile/OwnProfile';
 
-export function Matching(props) {
+export function Profile(props) {
 
     return (
         <Fragment>
-            <Match />
+            <OwnProfile />
         </Fragment>
     );
 }
@@ -19,4 +19,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(Matching));
+export default withRouter(connect(mapStateToProps)(Profile));

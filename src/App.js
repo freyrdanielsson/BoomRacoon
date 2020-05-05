@@ -12,6 +12,7 @@ import Home from './routes/home/Home';
 import Login from './routes/login/Login';
 import Matching from './routes/matching/Matching';
 import Details from './routes/details/Details';
+import Profile from './routes/profile/Profile';
 
 import './App.scss';
 
@@ -28,7 +29,7 @@ function App(props) {
       <main className='app'>
         <Header />
           <Switch location={location}>
-            <Route exact path='/' component={Details} />
+            <Route exact path='/' component={Profile} />
           </Switch>
         <Navigation />
       </main>
