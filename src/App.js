@@ -11,6 +11,7 @@ import Navigation from './components/navigation/Navigation';
 import Home from './routes/home/Home';
 import Login from './routes/login/Login';
 import Matching from './routes/matching/Matching';
+import Details from './routes/details/Details';
 
 import './App.scss';
 
@@ -27,7 +28,7 @@ function App(props) {
       <main className='app'>
         <Header />
           <Switch location={location}>
-            <Route exact path='/' component={Matching} />
+            <Route exact path='/' component={Details} />
           </Switch>
         <Navigation />
       </main>
