@@ -13,6 +13,7 @@ import Login from './routes/login/Login';
 import Matching from './routes/matching/Matching';
 import Details from './routes/details/Details';
 import Profile from './routes/profile/Profile';
+import ProfileEdit from './routes/profileEdit/ProfileEdit';
 
 import './App.scss';
 
@@ -29,7 +30,7 @@ function App(props) {
       <main className='app'>
         <Header />
           <Switch location={location}>
-            <Route exact path='/' component={Profile} />
+            <Route exact path='/' component={ProfileEdit} />
           </Switch>
         <Navigation />
       </main>
