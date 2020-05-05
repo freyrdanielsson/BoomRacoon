@@ -34,7 +34,9 @@
     background-color: #027DEE !important;
     top: 0;
     width: 100%;
-    position: fixed;
+    max-width: 1400px;
+    position: sticky !important;
+    margin-bottom: 0.5em;
 }
 .toolbar-bar {
     padding: 2px !important;

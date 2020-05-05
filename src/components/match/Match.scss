@@ -1,0 +1,51 @@
+.card-holder-match {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5em;
+}
+.match-image-container {
+    width: 100%;
+}
+.match-image {
+    width: 100%;
+}
+.match-info-flex {
+    display: flex;
+    justify-content: space-between;
+}
+.match-info-flex h2 {
+    margin: 0 0 !important;
+    font-weight: 500;
+}
+.match-info-description {
+    margin-bottom: 0em;
+    color: #737373;
+}
+.decide-buttons-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+.no-button, .yes-button {
+    color: white !important;
+    border-radius: 100px !important;
+    width: 4em;
+    height: 4em;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.no-button {
+    background-color: #F02C2C !important;
+    margin-right: 1em !important;
+}
+.yes-button {
+    background-color: #00D254 !important;
+    margin-left: 1em !important;
+}
+.check-icon, .x-icon {
+    font-size: 2em;
+}
+.MuiButton-root{
+    min-width: 2em !important;
+}

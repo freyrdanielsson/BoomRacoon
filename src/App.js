@@ -9,6 +9,8 @@ import Navigation from './components/navigation/Navigation';
 
 // import routes
 import Home from './routes/home/Home';
+import Login from './routes/login/Login';
+import Matching from './routes/matching/Matching';
 
 import './App.scss';
 
@@ -25,7 +27,7 @@ function App(props) {
       <main className='app'>
         <Header />
           <Switch location={location}>
-            <Route exact path='/' component={Home} />
+            <Route exact path='/' component={Matching} />
           </Switch>
         <Navigation />
       </main>

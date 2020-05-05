@@ -2,8 +2,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { logoutUser } from '../../actions/auth';
-import { AppBar, Toolbar, IconButton, Typography, Button} from '@material-ui/core';
-import ArrowBackIosIcon from '@material-ui/core/Icon';
+import { AppBar, Toolbar, IconButton,} from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
