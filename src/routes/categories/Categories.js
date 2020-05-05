@@ -1,15 +1,14 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import './Categories.scss';
+import CategoryList from '../../components/categoryList/CategoryList';
 
-import './Login.scss';
-import LoginForm from '../../components/loginForm/LoginForm';
-
-export function Login(props) {
+export function Categories(props) {
 
     return (
         <Fragment>
-            <LoginForm />
+            <CategoryList />
         </Fragment>
     );
 }
@@ -19,4 +18,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(Login));
+export default withRouter(connect(mapStateToProps)(Categories));

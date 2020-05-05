@@ -14,6 +14,7 @@ import Matching from './routes/matching/Matching';
 import Details from './routes/details/Details';
 import Profile from './routes/profile/Profile';
 import ProfileEdit from './routes/profileEdit/ProfileEdit';
+import Categories from './routes/categories/Categories';
 
 import './App.scss';
 
@@ -30,7 +31,7 @@ function App(props) {
       <main className='app'>
         <Header />
           <Switch location={location}>
-            <Route exact path='/' component={ProfileEdit} />
+            <Route exact path='/' component={Categories} />
           </Switch>
         <Navigation />
       </main>
