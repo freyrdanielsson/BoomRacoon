@@ -35,7 +35,7 @@ function App(props) {
       <main className='app'>
         <Header />
           <Switch location={location}>
-            <Route exact path='/' component={Messages} />
+            <Route exact path='/' component={Categories} />
           </Switch>
         <Navigation />
       </main>

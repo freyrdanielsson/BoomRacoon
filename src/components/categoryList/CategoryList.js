@@ -30,14 +30,14 @@ export function CategoryList(props) {
                 </div>
             </div>
             <Collapse in={collapse[0]}>
-                <List>
-                    <ListItem button><ListItemText primary="Tennis" className="sub-category"/></ListItem>
-                    <ListItem button><ListItemText primary="Football" className="sub-category"/></ListItem>
-                    <ListItem button><ListItemText primary="Fighting" className="sub-category"/></ListItem>
-                    <ListItem button><ListItemText primary="Badminton" className="sub-category"/></ListItem>
-                    <ListItem button><ListItemText primary="Volleyball" className="sub-category"/></ListItem>
-                    <ListItem button><ListItemText primary="Workout" className="sub-category"/></ListItem>
-                    <ListItem button><ListItemText primary="Running" className="sub-category"/></ListItem>
+                <List className="sub-category-items">
+                    <ListItem button className="sub-category-item"><ListItemText primary="Tennis" className="sub-category-text"/></ListItem>
+                    <ListItem button className="sub-category-item"><ListItemText primary="Football" className="sub-category-text"/></ListItem>
+                    <ListItem button className="sub-category-item"><ListItemText primary="Fighting" className="sub-category-text"/></ListItem>
+                    <ListItem button className="sub-category-item"><ListItemText primary="Badminton" className="sub-category-text"/></ListItem>
+                    <ListItem button className="sub-category-item"><ListItemText primary="Volleyball" className="sub-category-text"/></ListItem>
+                    <ListItem button className="sub-category-item"><ListItemText primary="Workout" className="sub-category-text"/></ListItem>
+                    <ListItem button className="sub-category-item"><ListItemText primary="Running" className="sub-category-text"/></ListItem>
                 </List>
             </Collapse>
 
@@ -47,7 +47,7 @@ export function CategoryList(props) {
                 </div>
             </div>
             <Collapse in={collapse[1]}>
-                <List>
+                <List className="sub-category-items">
                     <ListItem button><ListItemText primary="Dogs" className="sub-category"/></ListItem>
                     <ListItem button><ListItemText primary="Cats" className="sub-category"/></ListItem>
                 </List>
@@ -59,7 +59,7 @@ export function CategoryList(props) {
                 </div>
             </div>
             <Collapse in={collapse[2]}>
-                <List>
+                <List className="sub-category-items">
                     <ListItem button><ListItemText primary="Singing" className="sub-category"/></ListItem>
                     <ListItem button><ListItemText primary="Movies" className="sub-category"/></ListItem>
                 </List>
