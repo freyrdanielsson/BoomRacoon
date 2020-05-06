@@ -2,21 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Button, TextField, Link, Typography, Container } from '@material-ui/core';
-import './LoginForm.scss';
+import './SignupForm.scss';
 
-export function LoginForm(props) {
+export function SignupForm(props) {
 
     return (
-        <div className='login'>
+        <div className='signup'>
             <Container component="main" maxWidth="md">
                 <div className="paper-paper">
-                    <div className="login-image">
+                    <div className="signup-image">
                         <img src={require('../../assets/images/racoon.png')} />
                     </div>
-                    <Typography component="h1" variant="h5" className="login-title">
-                        LOG IN
+                    <Typography component="h1" variant="h5" className="signup-title">
+                        SIGN UP
                     </Typography>
-                    <form className="form-form" noValidate>
+                    <form className="signup-form" noValidate>
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -26,7 +26,6 @@ export function LoginForm(props) {
                             label="Email"
                             name="email"
                             autoComplete="email"
-                            autoFocus
                         />
                         <TextField
                             variant="outlined"
@@ -42,19 +41,12 @@ export function LoginForm(props) {
                         <Button
                             fullWidth
                             variant="contained"
-                            className="login-button-google"
+                            className="signup-button-standard"
                         >
-                            Log in with Google
+                            Sign up!
                         </Button>
-                        <Button
-                            fullWidth
-                            variant="contained"
-                            className="login-button-standard"
-                        >
-                            Log In
-                        </Button>
-                        <Link href="#" className="sign-up-link">
-                            No account? Sign up here!
+                        <Link href="#" className="login-link">
+                            Already have an account? Log in here!
                         </Link>
                     </form>
                 </div>
@@ -68,4 +60,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(LoginForm));
+export default withRouter(connect(mapStateToProps)(SignupForm));

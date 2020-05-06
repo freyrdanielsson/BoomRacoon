@@ -10,6 +10,7 @@ import Navigation from './components/navigation/Navigation';
 // import routes
 import Home from './routes/home/Home';
 import Login from './routes/login/Login';
+import Signup from './routes/signup/Signup';
 import Matching from './routes/matching/Matching';
 import Details from './routes/details/Details';
 import Profile from './routes/profile/Profile';
@@ -36,7 +37,7 @@ function App(props) {
       <main className='app'>
         <Header />
           <Switch location={location}>
-            <Route exact path='/' component={Matching} />
+            <Route exact path='/' component={Signup} />
           </Switch>
         <Navigation />
       </main>
