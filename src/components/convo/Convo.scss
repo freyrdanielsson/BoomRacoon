@@ -1,0 +1,54 @@
+.convo {
+    height: 100%;
+}
+.convo-header {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+.convo-header-name {
+    margin: 0 0 0.25em;
+}
+.convo-messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 0.5em;
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: scroll;
+    margin-bottom: 114px; //ugly solution
+}
+.message-bubble {
+    text-align: left;
+    background-color: #eee;
+    color: black;
+    border-radius: 20px;
+    padding: 8px 15px;
+    max-width: 60%;
+    margin-bottom: 0.5em;
+    float: left;
+    clear: both;
+}
+.sent-by-user {
+    float: right;
+    background-color: #0275d8;
+    color: white;
+}
+.input-flex {
+    display: flex;
+    position: relative;
+    width: 100%;
+    bottom: 56px;
+    position: fixed;
+}
+.message-input {
+    width: 70%;
+    background-color: white !important;
+}
+.message-send {
+    width: 30%;
+    background-color: #0275d8 !important;
+    color: white !important;
+}

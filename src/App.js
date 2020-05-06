@@ -18,6 +18,7 @@ import Categories from './routes/categories/Categories';
 import CategoryUpdate from './routes/categoryUpdate/CategoryUpdate';
 import Settings from './routes/settings/Settings';
 import Messages from './routes/messages/Messages';
+import Conversation from './routes/conversation/Conversation';
 
 
 import './App.scss';
@@ -35,7 +36,7 @@ function App(props) {
       <main className='app'>
         <Header />
           <Switch location={location}>
-            <Route exact path='/' component={Categories} />
+            <Route exact path='/' component={Conversation} />
           </Switch>
         <Navigation />
       </main>
