@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+.match-popup {
+    position: absolute;
+    background-color: rgba(0,0,0,0.8);
+    min-height: 100%;
+    width: 100%;
+    max-width: 1400px;
+    z-index: 1337;
+    text-align: center;
+    color: white;
+}
+.racoon {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+}
+.racoon-image {
+    width: 100%;
+}
+.boom {
+    font-family: 'Bangers', cursive;
+    font-size: 5em;
+    margin: 0;
+}
+.match-avatars-flex {
+    display: flex;
+    justify-content: space-around;
+}
+.match-success-avatar {
+    width: 5em !important;
+    height: 5em !important;
+    border: 0.1em solid white;
+}
+.matched-text {
+    font-weight: 400;
+}
+.talk-now, .keep-swiping {
+    width: 80% !important;
+    margin-bottom: 0.5em !important;
+}
+.talk-now {
+    background-color: #027DEE !important;
+}

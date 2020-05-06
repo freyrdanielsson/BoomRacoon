@@ -36,7 +36,7 @@ function App(props) {
       <main className='app'>
         <Header />
           <Switch location={location}>
-            <Route exact path='/' component={Conversation} />
+            <Route exact path='/' component={Matching} />
           </Switch>
         <Navigation />
       </main>

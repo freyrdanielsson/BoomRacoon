@@ -5,6 +5,7 @@ import { Button, Paper } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import './Match.scss';
+import MatchPopup from '../matchPopup/MatchPopup';
 
 export function Match(props) {
 
@@ -12,6 +13,7 @@ export function Match(props) {
 
     return (
         <div className='match'>
+            <MatchPopup />
             <Paper elevation={5} className="card-holder-match" >
                 <div className="match-image-container">
                     <img src={require('../../assets/images/tennis-woman.jpg')} className="match-image" alt=""></img>
