@@ -48,8 +48,8 @@ export function CategoryList(props) {
             </div>
             <Collapse in={collapse[1]}>
                 <List className="sub-category-items">
-                    <ListItem button><ListItemText primary="Dogs" className="sub-category"/></ListItem>
-                    <ListItem button><ListItemText primary="Cats" className="sub-category"/></ListItem>
+                    <ListItem button className="sub-category-item"><ListItemText primary="Dogs" className="sub-category-text"/></ListItem>
+                    <ListItem button className="sub-category-item"><ListItemText primary="Cats" className="sub-category-text"/></ListItem>
                 </List>
             </Collapse>
 
@@ -60,8 +60,8 @@ export function CategoryList(props) {
             </div>
             <Collapse in={collapse[2]}>
                 <List className="sub-category-items">
-                    <ListItem button><ListItemText primary="Singing" className="sub-category"/></ListItem>
-                    <ListItem button><ListItemText primary="Movies" className="sub-category"/></ListItem>
+                    <ListItem button className="sub-category-item"><ListItemText primary="Singing" className="sub-category-text"/></ListItem>
+                    <ListItem button className="sub-category-item"><ListItemText primary="Movies" className="sub-category-text"/></ListItem>
                 </List>
             </Collapse>
         </div>
