@@ -16,6 +16,8 @@ import Profile from './routes/profile/Profile';
 import ProfileEdit from './routes/profileEdit/ProfileEdit';
 import Categories from './routes/categories/Categories';
 import CategoryUpdate from './routes/categoryUpdate/CategoryUpdate';
+import Settings from './routes/settings/Settings';
+
 
 import './App.scss';
 
@@ -32,7 +34,7 @@ function App(props) {
       <main className='app'>
         <Header />
           <Switch location={location}>
-            <Route exact path='/' component={CategoryUpdate} />
+            <Route exact path='/' component={Settings} />
           </Switch>
         <Navigation />
       </main>

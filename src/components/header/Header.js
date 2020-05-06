@@ -26,7 +26,7 @@ export default function Header(props) {
                     <IconButton className="back-button"><FontAwesomeIcon icon={faChevronLeft} className="back-button-icon" /></IconButton>
                     </div>
                     <div className="header-flex-2">
-                        <IconButton>Boom Racoon</IconButton>
+                        <IconButton className="header-title">Boom Racoon</IconButton>
                     </div>
                 </div>                
             </Toolbar>
