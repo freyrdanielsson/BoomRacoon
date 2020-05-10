@@ -37,7 +37,7 @@ function App(props) {
       <main className='app'>
         <Header />
           <Switch location={location}>
-            <Route exact path='/' component={Login} />
+            <Route exact path='/' component={Home} />
           </Switch>
         <Navigation />
       </main>
