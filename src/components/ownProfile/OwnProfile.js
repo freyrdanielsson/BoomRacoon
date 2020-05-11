@@ -45,7 +45,6 @@ export function OwnProfile(props) {
                 </div>
                 <div className="match-details-description">
                     <p>{profile.description}</p>
-                    {/*<p>Skill level: <b>6</b> | Your skill level: <b>4</b></p>*/}
                 </div>
                 <div className="categories-container">
                     <h4>CATEGORIES</h4>
