@@ -4,29 +4,38 @@
     margin-right: auto;
     padding: 0.5em;
 }
+
 .profile-image-container {
     width: 100%;
 }
+
 .control-dots {
     padding: 0;
 }
+
 .profile-info {
     display: flex;
     justify-content: space-between;
 }
+
 .profile-info h2 {
     margin: 0 0 !important;
     font-weight: 500;
 }
+
 .profile-info h3 {
     margin: 0 0 !important;
     font-weight: 300;
 }
+
 .match-details-description {
     margin-bottom: 0em;
     color: #737373;
 }
-.edit-profile-button, .set-first, .remove-pic {
+
+.edit-profile-button,
+.set-first,
+.remove-pic {
     border-radius: 100px !important;
     width: 3em;
     height: 3em;
@@ -34,32 +43,53 @@
     margin: 0 !important;
     margin-top: 0.5em !important;
 }
+
 .set-first {
     position: absolute !important;
     margin-left: 0.5em !important;
 }
+
 .remove-pic {
     position: absolute !important;
     margin-left: 4em !important;
     background-color: #F02C2C !important;
     color: white !important;
 }
-.edit-icon, .remove-icon {
+
+.edit-icon,
+.remove-icon {
     font-size: 1.5em;
 }
+
 .categories-container h4 {
     margin: 1em 0 0.5em;
 }
-.shared-interest, .unshared-interest, .add-interest {
+
+.shared-interest,
+.unshared-interest,
+.add-interest {
     color: white !important;
     margin: 0 0.25em 0.5em !important;
 }
+
 .shared-interest {
     background-color: #2C98F0 !important;
 }
+
 .unshared-interest {
     background-color: #7B7B7B !important;
 }
+
 .add-interest {
     background-color: #00D254 !important;
+}
+
+.logout {
+    width: 100%;
+    align-items: center;
+    
+    .logout__button {
+        background-color: #ff5c33 !important;
+        color: #fff !important;
+    }
 }

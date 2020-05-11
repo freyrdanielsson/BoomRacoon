@@ -10,36 +10,41 @@ import { Carousel } from 'react-responsive-carousel';
 import './OwnProfile.scss';
 
 export function OwnProfile(props) {
-    const { setEditMode } = props;
+    const { setEditMode, profile, logout } = props;
+    console.log(profile);
+
+    const mockPics = [
+        { url: require('../../assets/images/boxing-boy.jpg') },
+        { url: require('../../assets/images/tennis-boy.jpg') },
+    ]
 
     return (
         <div className='profile'>
             <div className="profile-image-container">
                 <Carousel showArrows={false} showThumbs={false}>
-                    <div className="pic-one">
-                        <Button variant="contained" className="set-first" disabled><FontAwesomeIcon icon={faUserAlt} className="edit-icon" /></Button>
-                        <Button variant="contained" className="remove-pic"><FontAwesomeIcon icon={faTimes} className="remove-icon" /></Button>
-                        <img src={require('../../assets/images/boxing-boy.jpg')} className="match-image" alt=""></img>
-                    </div>
-                    <div>
-                        <Button variant="contained" className="set-first"><FontAwesomeIcon icon={faUserAlt} className="edit-icon" /></Button>
-                        <Button variant="contained" className="remove-pic"><FontAwesomeIcon icon={faTimes} className="remove-icon" /></Button>
-                        <img src={require('../../assets/images/tennis-boy.jpg')} className="match-image" alt=""></img>
-                    </div>
+                    {mockPics.map((pic) => {
+                        return (
+                            <div key={pic}>
+                                <Button variant="contained" className="set-first" disabled><FontAwesomeIcon icon={faUserAlt} className="edit-icon" /></Button>
+                                <Button variant="contained" className="remove-pic"><FontAwesomeIcon icon={faTimes} className="remove-icon" /></Button>
+                                <img src={pic.url} className="match-image" alt=""></img>
+                            </div>
+                        )
+                    })}
                 </Carousel>
             </div>
+
             <div className="profile-container">
                 <div className="profile-info">
                     <div className="profile-flex-1">
-                        <h2>Nathan, 20</h2>
-                        <h3>Stockholm</h3>
+                        <h2>{`${profile.name}, ${profile.age}`}</h2>
                     </div>
                     <div className="profile-flex-2">
                         <Button variant="contained" className="edit-profile-button" onClick={() => setEditMode(true)}><FontAwesomeIcon icon={faEdit} className="edit-icon" /></Button>
                     </div>
                 </div>
                 <div className="match-details-description">
-                    <p>Athletic fella looking for some workout buddies mainly in boxing! Looking for partners in similar age.</p>
+                    <p>{profile.description}</p>
                     {/*<p>Skill level: <b>6</b> | Your skill level: <b>4</b></p>*/}
                 </div>
                 <div className="categories-container">
@@ -48,6 +53,9 @@ export function OwnProfile(props) {
                     <Button variant="contained" className="shared-interest">BASKETBALL</Button>
                     <Button variant="contained" className="shared-interest">TENNIS</Button>
                     <Button variant="contained" className="add-interest">&nbsp;<FontAwesomeIcon icon={faPlus} className="add-icon" />&nbsp;</Button>
+                </div>
+                <div className="logout">
+                    <Button className="logout__button" onClick={logout}>Logout</Button>
                 </div>
             </div>
         </div>

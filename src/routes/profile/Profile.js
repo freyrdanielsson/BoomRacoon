@@ -17,13 +17,17 @@ export function Profile(props) {
         setEditMode(false);
     }
 
+    const handleLogout = () => {
+        firebase.logout();
+    }
+
     if (editMode) {
         return <ProfileForm profile={props.profile} handleUpdate={handleProfileUpdate} setEditMode={setEditMode}/>
     }
 
     return (
         <Fragment>
-            <OwnProfile profile={props.profile} setEditMode={setEditMode} />
+            <OwnProfile profile={props.profile} setEditMode={setEditMode} logout={handleLogout}/>
         </Fragment>
     );
 }
