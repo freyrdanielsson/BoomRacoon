@@ -5,12 +5,12 @@ import { Button } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faPlus, faTimes, faUserAlt } from '@fortawesome/free-solid-svg-icons'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+// http://react-responsive-carousel.js.org/storybook/?path=/story/01-basic--base
 import { Carousel } from 'react-responsive-carousel';
 import './OwnProfile.scss';
 
 export function OwnProfile(props) {
-
-    // http://react-responsive-carousel.js.org/storybook/?path=/story/01-basic--base
+    const { setEditMode } = props;
 
     return (
         <div className='profile'>
@@ -35,7 +35,7 @@ export function OwnProfile(props) {
                         <h3>Stockholm</h3>
                     </div>
                     <div className="profile-flex-2">
-                        <Button variant="contained" className="edit-profile-button"><FontAwesomeIcon icon={faEdit} className="edit-icon" /></Button>
+                        <Button variant="contained" className="edit-profile-button" onClick={() => setEditMode(true)}><FontAwesomeIcon icon={faEdit} className="edit-icon" /></Button>
                     </div>
                 </div>
                 <div className="match-details-description">
