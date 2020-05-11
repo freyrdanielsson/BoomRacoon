@@ -6,6 +6,8 @@ import './SignupForm.scss';
 import { signUpUser } from '../../actions/auth';
 
 export function SignupForm(props) {
+    console.log(props);
+    
 
     const [formInfo, setFormInfo] = useState(['', null, '', '']); // name, age, email, pwd
 

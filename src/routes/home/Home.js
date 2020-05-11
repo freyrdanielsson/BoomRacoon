@@ -10,7 +10,8 @@ import './Home.scss';
 export function Home(props) {
     // Where does the category prop come from? See line 34 and 41!
     const { categories } = props;
-    
+
+
     // If you need firebase function such as firebase.storage(...)
     const firebase = useFirebase();
 
@@ -29,7 +30,7 @@ export function Home(props) {
 
     // Show message if there are no categories
     if (isEmpty(categories)) {
-        return <div>Todos List Is Empty</div>
+        return <div>List Is Empty</div>
     }
 
     return (
@@ -42,7 +43,9 @@ export function Home(props) {
 // Connecting firestore state to component props
 const mapStateToProps = (state) => {
     return {
-        categories: state.firestore.data.categories
+        categories: state.firestore.data.categories,
+        auth: state.firebase.auth,
+        profile: state.firebase.profile,
     }
 }
 

@@ -2,10 +2,13 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Route, Switch, withRouter } from 'react-router-dom';
+import { useFirebase } from 'react-redux-firebase'
 
 // import components
 import Header from './components/header/Header';
 import Navigation from './components/navigation/Navigation';
+import UserRoute from './components/userRoute/UserRoute';
+
 
 // import routes
 import Home from './routes/home/Home';
@@ -27,7 +30,8 @@ import './App.scss';
 
 function App(props) {
   // likely want to access authentication status here as well
-  const { location } = props;
+  const { location, auth } = props;
+  const isAuthenticated = !auth.isEmpty;
 
   return (
     <Fragment>
@@ -35,23 +39,26 @@ function App(props) {
       <Helmet defaultTitle='BinGo' titleTemplate='%s - BinGo' />
 
       <main className='app'>
-        <Header />
-          <Switch location={location}>
-            <Route exact path='/' component={Login} />
-          </Switch>
-        <Navigation />
+        {isAuthenticated && <Header />}
+        <Switch location={location}>
+          <UserRoute exact path='/' authenticated={isAuthenticated} redirect='/login' component={Home} />
+          <UserRoute exact path='/matching' authenticated={isAuthenticated} redirect='/login' component={Login} />
+          <UserRoute exact path='/chat' authenticated={isAuthenticated} redirect='/login' component={Messages} />
+          <UserRoute exact path='/profile' authenticated={isAuthenticated} redirect='/login' component={Home} />
+          <UserRoute exact path='/login' authenticated={!isAuthenticated} redirect='/profile' component={Login} />
+          <UserRoute exact path='/signup' authenticated={!isAuthenticated} redirect='/profile' component={Signup} />
+        </Switch>
+        {isAuthenticated && <Navigation history={props.history} />}
       </main>
-    </Fragment>
+    </Fragment >
 
   )
 }
 
-// this is an example if we have a reducer called auth that has
-// a state variable isAuthenticated. Then this is how we connect it
-// to this components props
+// Connecting firestore state to component props
 const mapStateToProps = (state) => {
   return {
-    /* isAuthenticated: state.auth.isAuthenticated, */
+    auth: state.firebase.auth,
   }
 }
 
