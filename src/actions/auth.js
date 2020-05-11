@@ -5,10 +5,25 @@ export const SIGNUP_FAILURE = 'SIGN_UP_FAILURE';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const LOGIN_LOGOUT = 'LOGIN_LOGOUT';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGIN_FETCH = 'LOGIN_FETCH';
 export const LOGIN_FETCH_FAILURE = 'LOGIN_FETCH_FAILURE';
 
+export const logInUser = (input) => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+        console.log("trying to login");
+        firebase.auth().signInWithEmailAndPassword(
+            input[0],
+            input[1]
+        ).then((response) => {
+            console.log(response);
+            dispatch({ type: LOGIN_SUCCESS })
+        }).catch(err => {
+            dispatch({ type: LOGIN_FAILURE, err })
+        })
+    }
+}
 
 export const signUpUser = (newUser) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -33,6 +48,16 @@ export const signUpUser = (newUser) => {
             dispatch({ type: SIGNUP_SUCCESS })
         }).catch(err => {
             dispatch({ type: SIGNUP_FAILURE, err })
+        })
+    }
+}
+
+export const logOutUser = () => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+        firebase.auth().signOut()
+        .then(() => {
+            dispatch({ type: LOGOUT_SUCCESS })
         })
     }
 }
@@ -65,37 +90,5 @@ function loginError(message) {
         isAuthenticated: false,
         user: null,
         message
-    }
-}
-
-function logout() {
-    return {
-        type: LOGIN_LOGOUT,
-        isFetching: false,
-        isFetchingProfile: false,
-        isAuthenticated: false,
-        user: null,
-    }
-}
-
-export const logInUser = (input) => {
-    return (dispatch, getState, { getFirebase }) => {
-        const firebase = getFirebase();
-        console.log("trying to login");
-        firebase.auth().signInWithEmailAndPassword(
-            input[0],
-            input[1]
-        ).then((response) => {
-            console.log(response);
-            dispatch({ type: LOGIN_SUCCESS })
-        }).catch(err => {
-            dispatch({ type: LOGIN_FAILURE, err })
-        })
-    }
-}
-
-export const logoutUser = () => {
-    return async (dispatch) => {
-        // do logout logic and dispach logout action
     }
 }

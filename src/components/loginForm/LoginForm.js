@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Button, TextField, Link, Typography, Container } from '@material-ui/core';
 import './LoginForm.scss';
-import { logInUser } from '../../actions/auth';
+import { logInUser, logOutUser } from '../../actions/auth';
 
 
 export function LoginForm(props) {
@@ -20,6 +20,10 @@ export function LoginForm(props) {
         if(formInfo[0] && formInfo[1]) {
             props.logInUser(formInfo);
         }
+    }
+
+    const handleSignOut = () => {
+        props.logOutUser();
     }
 
     return (
@@ -65,7 +69,7 @@ export function LoginForm(props) {
                         >
                             Log In
                         </Button>
-                        <Link href="#" className="sign-up-link">
+                        <Link href="#" className="sign-up-link" onClick={() => handleSignOut()}>
                             No account? Sign up here!
                         </Link>
                     </form>
@@ -83,7 +87,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        logInUser: (input) => dispatch(logInUser(input))
+        logInUser: (input) => dispatch(logInUser(input)),
+        logOutUser: () => dispatch(logOutUser())
     }
 }
 
