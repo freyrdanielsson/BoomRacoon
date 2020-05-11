@@ -30,6 +30,8 @@ import './App.scss';
 function App(props) {
   // likely want to access authentication status here as well
   const { location, auth } = props;
+  console.log(props);
+  
   const isAuthenticated = !auth.isEmpty;
 
   return (
@@ -62,6 +64,7 @@ function App(props) {
 const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
+    profile: state.firebase.profile,
   }
 }
 
