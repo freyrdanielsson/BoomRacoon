@@ -6,6 +6,8 @@ import './Signup.scss';
 import SignupForm from '../../components/signupForm/SignupForm';
 
 export function Signup(props) {
+    console.log(props);
+    
 
     return (
         <Fragment>

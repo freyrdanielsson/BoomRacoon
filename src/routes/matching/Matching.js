@@ -4,10 +4,9 @@ import { withRouter } from 'react-router-dom';
 
 import './Matching.scss';
 import Match from '../../components/match/Match';
-import MatchPopup from '../../components/matchPopup/MatchPopup';
 
 export function Matching(props) {
-
+    
     return (
         <Fragment>
             <Match />
