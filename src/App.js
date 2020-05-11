@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useDebugValue } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import { useFirebase } from 'react-redux-firebase'
 
 // import components
 import Header from './components/header/Header';
@@ -17,10 +16,10 @@ import Signup from './routes/signup/Signup';
 import Matching from './routes/matching/Matching';
 import Details from './routes/details/Details';
 import Profile from './routes/profile/Profile';
-import ProfileEdit from './routes/profileEdit/ProfileEdit';
+import ProfileEdit from './routes/profileEdit/ProfileEdit'; // will be merged into profile?
 import Categories from './routes/categories/Categories';
 import CategoryUpdate from './routes/categoryUpdate/CategoryUpdate';
-import Settings from './routes/settings/Settings';
+import Settings from './routes/settings/Settings'; // will be merged into profile
 import Messages from './routes/messages/Messages';
 import Conversation from './routes/conversation/Conversation';
 
@@ -41,10 +40,14 @@ function App(props) {
       <main className='app'>
         {isAuthenticated && <Header />}
         <Switch location={location}>
+          {/* Home will never be accessable from navigation. For now I use it for debugging */}
           <UserRoute exact path='/' authenticated={isAuthenticated} redirect='/login' component={Home} />
-          <UserRoute exact path='/matching' authenticated={isAuthenticated} redirect='/login' component={Login} />
+          <UserRoute exact path='/profile' authenticated={isAuthenticated} redirect='/login' component={Profile} />
+          <UserRoute exact path='/matching' authenticated={isAuthenticated} redirect='/login' component={Matching} />
+          <UserRoute exact path='/matching/:id' authenticated={isAuthenticated} redirect='/login' component={Details} />
+          {/* chat/:id needs a bit more protection on client? OR on the firebase console we can  make rules! */}
           <UserRoute exact path='/chat' authenticated={isAuthenticated} redirect='/login' component={Messages} />
-          <UserRoute exact path='/profile' authenticated={isAuthenticated} redirect='/login' component={Home} />
+          <UserRoute exact path='/chat/:id' authenticated={isAuthenticated} redirect='/login' component={Conversation} />
           <UserRoute exact path='/login' authenticated={!isAuthenticated} redirect='/profile' component={Login} />
           <UserRoute exact path='/signup' authenticated={!isAuthenticated} redirect='/profile' component={Signup} />
         </Switch>
