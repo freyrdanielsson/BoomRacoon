@@ -42,13 +42,6 @@ export function LoginForm(props) {
                         <Button
                             fullWidth
                             variant="contained"
-                            className="login-button-google"
-                        >
-                            Log in with Google
-                        </Button>
-                        <Button
-                            fullWidth
-                            variant="contained"
                             className="login-button-standard"
                         >
                             Log In

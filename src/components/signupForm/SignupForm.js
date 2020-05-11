@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Button, TextField, Link, Typography, Container } from '@material-ui/core';
 import './SignupForm.scss';
+import { signUpUser } from '../../actions/auth';
 
 export function SignupForm(props) {
+
+    const [formInfo, setFormInfo] = useState(['', null, '', '']); // name, age, email, pwd
+
+    const handleChange = (index, e)  => {
+        let temp = [...formInfo];
+        temp[index] = e.target.value;
+        setFormInfo(temp);
+    }
+
+    const handleSubmit = () => {
+        if(formInfo[0] && formInfo[1] && formInfo[2] && formInfo[3]) {
+            props.signUpUser(formInfo);
+        }
+    }
 
     return (
         <div className='signup'>
@@ -16,7 +31,29 @@ export function SignupForm(props) {
                     <Typography component="h1" variant="h5" className="signup-title">
                         SIGN UP
                     </Typography>
-                    <form className="signup-form" noValidate>
+                    <form className="signup-form" >
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="nameSignup"
+                            label="Name"
+                            name="name"
+                            type="text"
+                            onChange={(e) => handleChange(0, e)}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="ageSignup"
+                            label="Age"
+                            name="age"
+                            type="number"
+                            onChange={(e) => handleChange(1, e)}
+                        />
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -26,6 +63,7 @@ export function SignupForm(props) {
                             label="Email"
                             name="email"
                             autoComplete="email"
+                            onChange={(e) => handleChange(2, e)}
                         />
                         <TextField
                             variant="outlined"
@@ -37,15 +75,17 @@ export function SignupForm(props) {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            onChange={(e) => handleChange(3, e)}
                         />
                         <Button
                             fullWidth
                             variant="contained"
                             className="signup-button-standard"
+                            onClick={() => handleSubmit()}
                         >
                             Sign up!
                         </Button>
-                        <Link href="#" className="login-link">
+                        <Link href="#" className="login-link" >
                             Already have an account? Log in here!
                         </Link>
                     </form>
@@ -59,5 +99,10 @@ const mapStateToProps = (state) => {
     return {
     }
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signUpUser: (newUser) => dispatch(signUpUser(newUser))
+    }
+}
 
-export default withRouter(connect(mapStateToProps)(SignupForm));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignupForm));

@@ -1,11 +1,41 @@
 import api from '../api';
 
+export const SIGNUP_SUCCESS = 'SIGN_UP_SUCCESS';
+export const SIGNUP_FAILURE = 'SIGN_UP_FAILURE';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGIN_LOGOUT = 'LOGIN_LOGOUT';
 export const LOGIN_FETCH = 'LOGIN_FETCH';
 export const LOGIN_FETCH_FAILURE = 'LOGIN_FETCH_FAILURE';
+
+
+export const signUpUser = (newUser) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        console.log("trying to create acc");
+        firebase.auth().createUserWithEmailAndPassword(
+            newUser[2],
+            newUser[3]
+        ).then((response) => {
+            console.log(response)
+            return firestore.collection('users').doc(response.user.uid).set({
+                name: newUser[0],
+                age: newUser[1],
+                email: newUser[2],
+                pics: [],
+                matchings: [],
+                interests: [],
+                conversations: []
+            })
+        }).then(() => {
+            dispatch({ type: SIGNUP_SUCCESS })
+        }).catch(err => {
+            dispatch({ type: SIGNUP_FAILURE, err })
+        })
+    }
+}
 
 function requestLogin() {
     return {
