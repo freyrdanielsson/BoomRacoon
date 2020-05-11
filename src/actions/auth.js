@@ -78,9 +78,19 @@ function logout() {
     }
 }
 
-export const loginUser = (username, password) => {
-    return async (dispatch) => {
-        // do login logic and dispach login actions
+export const logInUser = (input) => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+        console.log("trying to login");
+        firebase.auth().signInWithEmailAndPassword(
+            input[0],
+            input[1]
+        ).then((response) => {
+            console.log(response);
+            dispatch({ type: LOGIN_SUCCESS })
+        }).catch(err => {
+            dispatch({ type: LOGIN_FAILURE, err })
+        })
     }
 }
 

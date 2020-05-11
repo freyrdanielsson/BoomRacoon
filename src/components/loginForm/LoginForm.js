@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Button, TextField, Link, Typography, Container } from '@material-ui/core';
 import './LoginForm.scss';
+import { logInUser } from '../../actions/auth';
+
 
 export function LoginForm(props) {
+
+    const [formInfo, setFormInfo] = useState(['', '']); // email, pwd
+
+    const handleChange = (index, e)  => {
+        let temp = [...formInfo];
+        temp[index] = e.target.value;
+        setFormInfo(temp);
+    }
+
+    const handleSubmit = () => {
+        if(formInfo[0] && formInfo[1]) {
+            props.logInUser(formInfo);
+        }
+    }
 
     return (
         <div className='login'>
@@ -27,6 +43,7 @@ export function LoginForm(props) {
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            onChange={(e) => handleChange(0, e)}
                         />
                         <TextField
                             variant="outlined"
@@ -38,11 +55,13 @@ export function LoginForm(props) {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            onChange={(e) => handleChange(1, e)}
                         />
                         <Button
                             fullWidth
                             variant="contained"
                             className="login-button-standard"
+                            onClick={() => handleSubmit()}
                         >
                             Log In
                         </Button>
@@ -57,8 +76,15 @@ export function LoginForm(props) {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(LoginForm));
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logInUser: (input) => dispatch(logInUser(input))
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));
