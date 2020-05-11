@@ -1,0 +1,25 @@
+.settings-list {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.settings-flex {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+.settings-flex h3 {
+    margin: 0 0 0 0;
+    font-weight: 500;
+    -ms-transform: translateY(10%);
+    transform: translateY(10%);
+}
+.MuiSwitch-colorPrimary.Mui-checked	{
+    color: #1976d2 !important;
+}
+.log-out-button {
+    width: 90% !important;
+    margin-left: 5% !important;
+    background-color: #F02C2C !important;
+    color: white !important;
+}

@@ -1,0 +1,37 @@
+
+.messages-title {
+    margin: 0;
+    margin-left: 0.5em;
+}
+.convo-match {
+    border-bottom: 1px solid #e0e0e0 !important;
+}
+.new-matches {
+    display: flex !important;
+    justify-content: start !important;
+    overflow-x: auto !important;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+.new-match {
+    display: block !important;
+    padding: 0 !important;
+    min-width: 22%;
+}
+.new-match-avatar {
+    align-items: center;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 3em !important;
+    height: 3em !important;
+}
+.new-match-name {
+    text-align: center !important;
+}
+.convo-match-avatar {
+    width: 3em !important;
+    height: 3em !important;
+}
+.convo-match-text {
+    margin-left: 1em;
+}

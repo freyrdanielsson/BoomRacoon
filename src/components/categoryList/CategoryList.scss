@@ -1,0 +1,27 @@
+.head-category {
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+}
+.tint {
+    height: inherit;
+    width: 100%;
+    position: absolute;
+    background-color: rgba(0,0,0,0.5);
+}
+.category-title {
+    text-align: center;
+    color: white;
+    margin: 0;
+    -ms-transform: translateY(50%);
+    transform: translateY(50%);
+}
+.sub-category-items {
+    padding: 0 !important;
+}
+.sub-category-item {
+    border-bottom: 1px solid #e0e0e0 !important;
+}
+.sub-category-text {
+    text-align: center;
+}

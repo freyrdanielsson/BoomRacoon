@@ -1,0 +1,44 @@
+.match-details {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5em;
+}
+.match-image-container {
+    width: 100%;
+}
+.match-image {
+    width: 100%;
+}
+.control-dots {
+    padding: 0;
+}
+.match-details-flex {
+    display: flex;
+    justify-content: space-between;
+}
+.match-details-flex h2 {
+    margin: 0 0 !important;
+    font-weight: 500;
+}
+.match-details-flex-2 h3 {
+    margin: 0 0 !important;
+    font-weight: 300;
+}
+.match-details-description {
+    margin-bottom: 0em;
+    color: #737373;
+}
+.categories-container h4 {
+    margin: 1em 0 0.5em;
+}
+.shared-interest, .unshared-interest {
+    color: white !important;
+    margin: 0 0.25em 0.5em !important;
+}
+.shared-interest {
+    background-color: #2C98F0 !important;
+}
+.unshared-interest {
+    background-color: #7B7B7B !important;
+}
