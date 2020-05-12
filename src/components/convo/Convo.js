@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Button, TextField } from '@material-ui/core';
@@ -6,21 +6,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import './Convo.scss';
 import { sendMessage} from '../../actions/chats';
+import { animateScroll } from "react-scroll";
 
 export function Convo(props) {
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [])
 
     const id = props.match.params.id;
     const [text, setText] = useState(''); // email, pwd
 
-    const handleChange = (e)  => {
-        let temp = e.target.value;
-        setText(temp);
-    }
-
     const handleSend = () => {
         if(text) {
             props.sendMessage(id, text);
+            setText('');
         }
+    }
+
+    function scrollToBottom() {
+        animateScroll.scrollToBottom({
+          containerId: "convo-messages"
+        });
     }
 
     let index = null;
@@ -32,7 +39,7 @@ export function Convo(props) {
     }
 
     let messages = index === null ? null : props.chatList[index].messages.map(message => {
-        return <li key={message.message_id} className={"message-bubble " + (message.sender_uid == props.uid ? "sent-by-user" : null)}>{message.content}</li>
+        return <li key={message.message_id} className={"message-bubble " + (message.sender_uid == props.uid ? "sent-by-user" : null)} onClick={() => scrollToBottom()}>{message.content}</li>
     })
 
     return (
@@ -40,12 +47,12 @@ export function Convo(props) {
             <div className="convo-header">
                 <h2 className="convo-header-name">Julian</h2>
             </div>
-            <ul className="convo-messages">
+            <ul className="convo-messages" id="convo-messages">
                 {messages}
             </ul>
             
             <div className="input-flex">
-                <TextField id="message-input" className="message-input" label="Your message..." onChange={(e) => handleChange(e)} />
+                <TextField id="message-input" className="message-input" label="Your message..." onChange={(e) => setText(e.target.value)} />
                 <Button variant="contained" className="message-send" onClick={() => handleSend()}>Send</Button>
             </div>
         </div>

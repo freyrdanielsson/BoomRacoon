@@ -26,6 +26,18 @@ const chatsReducer = (state = initState, action) => {
                 ...state,
                 err: null
             }
+        case 'UPDATE_CHATS':
+            let temp = state.chatList;
+            for(let i = 0; i < temp.length; i++) {
+                if(action.payload[0].chatId === temp[i].chatId) {
+                    temp[i] = action.payload[0];
+                    break;
+                }
+            }
+            return {
+                ...state,
+                chatList: temp
+            }
         default:
             return state
     }

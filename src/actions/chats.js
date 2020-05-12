@@ -6,6 +6,7 @@ export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
 export const REMOVE_CHAT = 'REMOVE_CHAT';
 export const FETCH_CHATS = 'FETCH_CHATS';
 export const FETCH_CHATS_FAILURE = 'FETCH_CHATS_FAILURE';
+export const UPDATE_CHATS = 'UPDATE_CHATS';
 
 export const fetchChats = () => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -43,7 +44,7 @@ export const fetchChats = () => {
                             const data = doc.data();
                             const id = doc.id;
                             data.chatId = id;
-                            dispatch({ type: FETCH_CHATS, payload: [data] });
+                            dispatch({ type: UPDATE_CHATS, payload: [data] });
                         })
                     }
                     dispatch({ type: FETCH_CHATS, payload: concat });

@@ -58,7 +58,6 @@ export function MessageList(props) {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         chatList: state.chats.chatList,
         uid: state.firebase.auth.uid
