@@ -6,6 +6,11 @@ const chatsReducer = (state = initState, action) => {
     switch (action.type) {
         case 'SEND_MESSAGE':
             return state
+        case 'SEND_MESSAGE_FAILURE':
+            return {
+                ...state,
+                err: null
+            }
         case 'REMOVE_MESSAGE':
             return state
         case 'REMOVE_CHAT':

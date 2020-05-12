@@ -10,7 +10,7 @@ export default function Navigation(props) {
     const [navbarSelect, setNavbarSelect] = useState("matching");
 
     const navigate = value => {
-        props.history.push(value)
+        props.history.push("/" + value)
         setNavbarSelect(value);
     }
 
