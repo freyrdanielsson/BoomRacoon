@@ -22,12 +22,12 @@ export function Profile(props) {
     }
 
     if (editMode) {
-        return <ProfileForm profile={props.profile} handleUpdate={handleProfileUpdate} setEditMode={setEditMode}/>
+        return <ProfileForm profile={props.profile} handleUpdate={handleProfileUpdate} setEditMode={setEditMode} />
     }
 
     return (
         <Fragment>
-            <OwnProfile profile={props.profile} setEditMode={setEditMode} logout={handleLogout}/>
+            <OwnProfile profile={props.profile} setEditMode={setEditMode} logout={handleLogout} firebase={firebase}/>
         </Fragment>
     );
 }
