@@ -4,12 +4,13 @@ import { withRouter } from 'react-router-dom';
 
 import './Matching.scss';
 import Match from '../../components/match/Match';
+import MatchDetails from '../../components/matchDetails/MatchDetails';
 
 export function Matching(props) {
     
     return (
         <Fragment>
-            <Match />
+            <MatchDetails />
         </Fragment>
     );
 }
