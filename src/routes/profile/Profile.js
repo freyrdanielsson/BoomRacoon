@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { firestoreConnect, useFirebase, isLoaded } from 'react-redux-firebase';
 
+import { setFunction } from '../../actions/header';
+
 import './Profile.scss';
 import OwnProfile from '../../components/ownProfile/OwnProfile';
 import ProfileForm from '../../components/profileForm/ProfileForm';
@@ -11,7 +13,7 @@ import CategoryList from '../../components/categoryList/CategoryList';
 
 export function Profile(props) {
     const [editMode, setEditMode] = useState(false);
-    const [categoryMode, setCategoryMode] = useState(true);
+    const [categoryMode, setCategoryMode] = useState(false);
     const firebase = useFirebase();
 
     const handleProfileUpdate = (payload) => {
@@ -23,17 +25,37 @@ export function Profile(props) {
         firebase.logout();
     }
 
+    const updateHeader = (active) => {
+        const f = () => {
+            setCategoryMode(false);
+        }
+        props.dispatch(setFunction(f, active));
+    }
+
+    const changeCategory = (category) => {
+        firebase.updateProfile({
+            category,
+            interests: [],
+        });
+    }
+
+    const changeInterest = (interests) => {
+        firebase.updateProfile({
+            interests,
+        });
+    }
+
     if (editMode) {
         return <ProfileForm profile={props.profile} handleUpdate={handleProfileUpdate} setEditMode={setEditMode} />
     }
 
     if (categoryMode && props.categories) {
-        return <CategoryList categories={props.categories} />
+        return <CategoryList categories={props.categories} profile={props.profile} updateHeader={updateHeader} changeCategory={changeCategory} changeInterest={changeInterest} />
     }
 
     return (
         <Fragment>
-            <OwnProfile profile={props.profile} setEditMode={setEditMode} logout={handleLogout} firebase={firebase} />
+            <OwnProfile profile={props.profile} setEditMode={setEditMode} setCategoryMode={() => setCategoryMode(true)} logout={handleLogout} firebase={firebase} />
         </Fragment>
     );
 }

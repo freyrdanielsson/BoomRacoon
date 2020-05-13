@@ -9,7 +9,7 @@ import { Carousel } from 'react-responsive-carousel';
 import './OwnProfile.scss';
 
 export default function OwnProfile(props) {
-    const { setEditMode, profile, logout, firebase } = props;
+    const { setEditMode, setCategoryMode, profile, logout, firebase } = props;
 
     const [loadingImg, setLoadingImg] = useState(false);
 
@@ -101,7 +101,7 @@ export default function OwnProfile(props) {
                 </Carousel>
             }
 
-            <div className="profile-container">
+            <div className="profile__container">
                 <div className="profile-info">
                     <div className="profile-flex-1">
                         <h2>{`${profile.name || ''}, ${profile.age || ''}`}</h2>
@@ -119,12 +119,16 @@ export default function OwnProfile(props) {
                         : 'Tap here to select category'
                     }</h4>
 
-                    {profile.isLoaded && profile.interests.map(interest => {
-                        return (
-                            <Button key={interest} variant="contained" className="shared-interest">{interest}</Button>
-                        )
-                    })}
-                    <Button variant="contained" className="add-interest">&nbsp;<FontAwesomeIcon icon={faPlus} className="add-icon" />&nbsp;</Button>
+                    {profile.isLoaded
+                        && <div className="profile__interests">
+                            {profile.interests.map(interest => {
+                                return (
+                                    <Button key={interest} variant="contained" className="shared-interest">{interest}</Button>
+                                );
+                            })}
+                            <Button onClick={setCategoryMode} variant="contained" className="add-interest">&nbsp;<FontAwesomeIcon icon={faPlus} className="add-icon" />&nbsp;</Button>
+                        </div>
+                    }
                 </div>
                 <div className="profile__logout">
                     <Button className="profile__logout__button" onClick={logout}>Logout</Button>

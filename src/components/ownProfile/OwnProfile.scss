@@ -7,6 +7,7 @@
 .profile-info {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .profile-info h2 {
@@ -20,7 +21,7 @@
 }
 
 .match-details-description {
-    margin-bottom: 0em;
+    margin: $gutter / 2 0;
     color: #737373;
 }
 
@@ -33,6 +34,10 @@
     padding: 0 !important;
     margin: 0 !important;
     margin-top: 0.5em !important;
+}
+
+.edit-profile-button {
+    margin: 0 !important;
 }
 
 .set-first {
@@ -84,6 +89,16 @@
     margin-right: auto;
     padding: 0.5em;
 
+    &__interests {
+        border: 1px dashed #2C98F0;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    &__container {
+        margin-top: $gutter;
+    }
+
     &__hidden {
         display: none;
     }
@@ -116,7 +131,9 @@
     &__logout {
         width: 100%;
         align-items: center;
-    
+        text-align: center;
+        margin-top: $gutter * 2;
+
         &__button {
             background-color: #ff5c33 !important;
             color: #fff !important;
