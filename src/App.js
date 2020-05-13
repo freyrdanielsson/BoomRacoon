@@ -30,6 +30,13 @@ function App(props) {
 
   const isAuthenticated = !auth.isEmpty;
 
+  if (!auth.isLoaded) {
+    // Here would be a good idea to show splash screen with  logo
+    // while waiting for user tobe authenticated
+    return <></>
+  }
+  
+
   return (
     <Fragment>
       {/* This is a nice package for controlling the title of the page */}
@@ -50,7 +57,7 @@ function App(props) {
           <UserRoute exact path='/signup' authenticated={!isAuthenticated} redirect='/profile' component={Signup} />
         </Switch>
       </main>
-      {isAuthenticated && <Navigation history={props.history} />}
+      {isAuthenticated && <Navigation history={props.history} location={location} />}
     </Fragment >
 
   )
