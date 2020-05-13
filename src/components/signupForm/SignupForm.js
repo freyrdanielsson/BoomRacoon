@@ -87,7 +87,7 @@ export function SignupForm(props) {
                         >
                             Sign up!
                         </Button>
-                        <Link href="#" className="login-link" >
+                        <Link href="/login" className="login-link" >
                             Already have an account? Log in here!
                         </Link>
                     </form>
