@@ -27,7 +27,8 @@ export default function OwnProfile(props) {
                 firebase.updateProfile({
                     pics: [...profile.pics, {
                         url: url,
-                        order: 1
+                        order: 1,
+                        path: filePath
                     }]
                 });
             });
@@ -56,9 +57,23 @@ export default function OwnProfile(props) {
         mediaCaptureElement.click();
     }
 
+    const deleteImage = (e, img) => {
+        setLoadingImg(true);
+        e.preventDefault();
+
+        firebase.storage().ref(img.path).delete().then(() => {
+            const rest = profile.pics.filter(pic => { return pic.path !== img.path });
+            firebase.updateProfile({ pics: rest });
+        }).catch(error => {
+            console.error('There was an error removing a file to Cloud Storage:', error);
+        }).finally(() => {
+            setLoadingImg(false);
+        });
+    }
+
     return (
         <div className='profile'>
-            <input className="profile__hidden" id="mediaCapture" type="file" accept="image/*" capture="camera" onChange={(e) => handleFileSelect(e)} />
+            <input className="profile__hidden" id="mediaCapture" type="file" accept="image/*" onChange={(e) => handleFileSelect(e)} />
 
             {loadingImg
                 && <div>
@@ -74,7 +89,7 @@ export default function OwnProfile(props) {
                                 {profile.pics[i]
                                     && <React.Fragment>
                                         <Button variant="contained" className="set-first" disabled><FontAwesomeIcon icon={faUserAlt} className="edit-icon" /></Button>
-                                        <Button variant="contained" className="remove-pic"><FontAwesomeIcon icon={faTimes} className="remove-icon" /></Button>
+                                        <Button variant="contained" className="remove-pic" onClick={e => deleteImage(e, profile.pics[i])}><FontAwesomeIcon icon={faTimes} className="remove-icon" /></Button>
                                     </React.Fragment>
                                 }
                                 {profile.pics[i]

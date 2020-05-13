@@ -10,14 +10,14 @@ export function LoginForm(props) {
 
     const [formInfo, setFormInfo] = useState(['', '']); // email, pwd
 
-    const handleChange = (index, e) => {
+    const handleChange = (index, e)  => {
         let temp = [...formInfo];
         temp[index] = e.target.value;
         setFormInfo(temp);
     }
 
     const handleSubmit = () => {
-        if (formInfo[0] && formInfo[1]) {
+        if(formInfo[0] && formInfo[1]) {
             props.logInUser(formInfo);
         }
     }
@@ -79,6 +79,12 @@ export function LoginForm(props) {
     );
 }
 
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         logInUser: (input) => dispatch(logInUser(input)),
@@ -86,4 +92,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default withRouter(connect(mapDispatchToProps)(LoginForm));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));
