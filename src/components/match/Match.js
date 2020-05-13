@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import './Match.scss';
 import MatchPopup from '../matchPopup/MatchPopup';
+import { logOutUser } from '../../actions/auth';
 
 export function Match(props) {
 
@@ -33,7 +34,7 @@ export function Match(props) {
                 </div>
             </Paper>
             <div className="decide-buttons-container">
-                <Button variant="contained" className="no-button"><FontAwesomeIcon icon={faTimes} className="x-icon" /></Button>
+                <Button variant="contained" className="no-button"><FontAwesomeIcon icon={faTimes} className="x-icon" onClick={() => props.logOutUser()} /></Button>
                 <Button variant="contained" className="yes-button"><FontAwesomeIcon icon={faCheck} className="check-icon" /></Button>
             </div>
         </div>
@@ -45,4 +46,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(Match));
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logOutUser: () => dispatch(logOutUser())
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Match));
