@@ -17,7 +17,6 @@ const chatsReducer = (state = initState, action) => {
         case 'REMOVE_CHAT':
             return state
         case 'FETCH_CHATS':
-            console.log('FETCH CHATS REDUCER');
             return {
                 ...state,
                 chatList: action.payload

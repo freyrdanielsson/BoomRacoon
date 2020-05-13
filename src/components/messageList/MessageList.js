@@ -36,7 +36,7 @@ export function MessageList(props) {
                         <ListItemAvatar>
                             <Avatar alt={props.uid} src={require('../../assets/images/nature-woman.jpg')} className="convo-match-avatar" />
                         </ListItemAvatar>
-                        <ListItemText multiline primary={chat.user_uid_one !== props.uid ? chat.user_uid_one : chat.user_uid_two} secondary={ chat.messages[chat.messages.length-1].content + '\n' /* +  chat.messages[chat.messages.length-1].time.toDate().toString().split(" GMT")[0] */ } className="convo-match-text" />
+                        <ListItemText primary={chat.user_uid_one !== props.uid ? chat.user_uid_one : chat.user_uid_two} secondary={ chat.messages[chat.messages.length-1].content + '\n' /* +  chat.messages[chat.messages.length-1].time.toDate().toString().split(" GMT")[0] */ } className="convo-match-text" />
                     </ListItem>
                 </Link>
             )

@@ -12,7 +12,6 @@ export const fetchChats = () => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
-        console.log("trying to fetch chats");
         const uid = firebase.auth().currentUser.uid;
         let queryOne, queryTwo = null;
         let documents = [];
