@@ -13,7 +13,6 @@ export default function OwnProfile(props) {
 
     const [loadingImg, setLoadingImg] = useState(false);
 
-
     const uploadFile = (file) => {
         setLoadingImg(true);
 
@@ -115,10 +114,16 @@ export default function OwnProfile(props) {
                     <p>{profile.description}</p>
                 </div>
                 <div className="categories-container">
-                    <h4>CATEGORIES</h4>
-                    <Button variant="contained" className="shared-interest">BOXING</Button>
-                    <Button variant="contained" className="shared-interest">BASKETBALL</Button>
-                    <Button variant="contained" className="shared-interest">TENNIS</Button>
+                    <h4>{profile.category
+                        ? `CATEGORY: ${profile.category}`
+                        : 'Tap here to select category'
+                    }</h4>
+
+                    {profile.isLoaded && profile.interests.map(interest => {
+                        return (
+                            <Button key={interest} variant="contained" className="shared-interest">{interest}</Button>
+                        )
+                    })}
                     <Button variant="contained" className="add-interest">&nbsp;<FontAwesomeIcon icon={faPlus} className="add-icon" />&nbsp;</Button>
                 </div>
                 <div className="profile__logout">
