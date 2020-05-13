@@ -48,7 +48,7 @@ function App(props) {
           {/* Home will never be accessable from navigation. For now I use it for debugging */}
           <UserRoute exact path='/' authenticated={isAuthenticated} redirect='/login' component={Home} />
           <UserRoute exact path='/profile' authenticated={isAuthenticated} redirect='/login' component={Profile} />
-          <UserRoute exact path='/matching' authenticated={isAuthenticated} redirect='/login' component={Categories} />
+          <UserRoute exact path='/matching' authenticated={isAuthenticated} redirect='/login' component={Matching} />
           <UserRoute exact path='/matching/:id' authenticated={isAuthenticated} redirect='/login' component={Details} />
           {/* chat/:id needs a bit more protection on client? OR on the firebase console we can  make rules! */}
           <UserRoute exact path='/chat' authenticated={isAuthenticated} redirect='/login' component={Messages} />
