@@ -5,7 +5,7 @@ import { Button, TextField } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import './Convo.scss';
-import { sendMessage} from '../../actions/chats';
+import { sendMessage, removeMessage } from '../../actions/chats';
 import { animateScroll } from "react-scroll";
 
 export function Convo(props) {
@@ -21,7 +21,8 @@ export function Convo(props) {
     }
 
     const id = props.match.params.id;
-    const [text, setText] = useState(''); // email, pwd
+    const [text, setText] = useState('');
+    const [clickedMessageIndex, setClickedMessage] = useState(-1);
 
     const handleSend = () => {
         if(text) {
@@ -29,6 +30,15 @@ export function Convo(props) {
             setText('');
             document.getElementById('message-input').value = '';
             document.getElementById("message-input").focus();
+        }
+    }
+
+    const handleRemove = (sender_uid, index) => {
+        if(props.uid === sender_uid && clickedMessageIndex == index) {
+            props.removeMessage(id, index);
+            setClickedMessage(-1);
+        } else {
+            setClickedMessage(index);
         }
     }
 
@@ -40,8 +50,8 @@ export function Convo(props) {
         }
     }
 
-    let messages = index === null ? null : props.chatList[index].messages.map(message => {
-        return <li key={message.message_id} className={"message-bubble " + (message.sender_uid == props.uid ? "sent-by-user" : null)}>{message.content}</li>
+    let messages = index === null ? null : props.chatList[index].messages.map((message, index) => {
+        return <li key={message.message_id} className={"message-bubble " + (message.sender_uid == props.uid ? "sent-by-user" : null)} onClick={() => handleRemove(message.sender_uid, index)}>{message.content}</li>
     })
 
     return (
@@ -72,7 +82,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        sendMessage: (conversationId, content) => dispatch(sendMessage(conversationId, content))
+        sendMessage: (conversationId, content) => dispatch(sendMessage(conversationId, content)),
+        removeMessage: (conversationId, messageIndex) => dispatch(removeMessage(conversationId, messageIndex))
     }
 }
 

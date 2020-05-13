@@ -81,6 +81,25 @@ export const sendMessage = (conversationId, content) => {
     }
 }
 
+export const removeMessage = (conversationId, messageIndex) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        console.log("trying to remove message");
+        let collectionRef = firestore.collection('conversations').doc(conversationId)
+        collectionRef.get()
+            .then(doc => {
+                console.log(doc.data());
+                let data = doc.data();
+                data.messages.splice(messageIndex, 1);
+                console.log(data);
+                return collectionRef.update({
+                    messages: data.messages
+                }).then(() => dispatch({ type: REMOVE_MESSAGE }))
+            })
+    }
+}
+
 
 
 /*
