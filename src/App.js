@@ -39,7 +39,7 @@ function App(props) {
   return (
     <Fragment>
       {/* This is a nice package for controlling the title of the page */}
-      <Helmet defaultTitle='BinGo' titleTemplate='%s - BinGo' />
+      <Helmet defaultTitle='Boom Racoon' titleTemplate='%s - Boom Racoon' />
 
       {isAuthenticated && <Header />}
       <main className='app'>

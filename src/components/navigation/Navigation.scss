@@ -1,7 +1,7 @@
 @import '../../config.scss';
 
 .MuiBottomNavigation-root {
-    background-color: #027DEE !important;
+    background-color: #818181 !important;
     bottom: 0;
     position: fixed;
     width: 100%;
@@ -11,7 +11,7 @@
     color: white !important;
 }
 .navigation-icon {
-    color: #80BEF7 !important;
+    color: #F79E1B !important;
     font-size: 1.5em;
 }
 .Mui-selected .MuiBottomNavigationAction-wrapper .navigation-icon {
