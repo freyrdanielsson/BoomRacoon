@@ -72,7 +72,6 @@ export function Convo(props) {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         chatList: state.chats.chatList,
         randomnumber: state.chats.randomnumber,

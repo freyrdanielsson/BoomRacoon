@@ -14,7 +14,6 @@ export function MessageList(props) {
         props.fetchChats();
     }, [])
 
-    console.log(props.chatList);
     let convoNotStarted = !props.chatList ? null : props.chatList.map(chat => {
         if(!chat.messages.length) {
             return (

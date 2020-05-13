@@ -59,9 +59,7 @@ export const sendMessage = (conversationId, content) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
-        console.log("trying to send message");
         const uid = firebase.auth().currentUser.uid;
-        console.log(conversationId);
         firestore.collection('conversations').doc(conversationId).update({
             messages: firestore.FieldValue.arrayUnion({
                 content: content,
@@ -71,11 +69,9 @@ export const sendMessage = (conversationId, content) => {
             })
         })
         .then(() => {
-            console.log("success!!!!!!!!")
             dispatch({ type: SEND_MESSAGE })
         })
         .catch((err) => {
-            console.log("noooooooooooooo!!!")
             dispatch({ type: SEND_MESSAGE_FAILURE, err })
         })
     }
@@ -85,14 +81,11 @@ export const removeMessage = (conversationId, messageIndex) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
-        console.log("trying to remove message");
         let collectionRef = firestore.collection('conversations').doc(conversationId)
         collectionRef.get()
             .then(doc => {
-                console.log(doc.data());
                 let data = doc.data();
                 data.messages.splice(messageIndex, 1);
-                console.log(data);
                 return collectionRef.update({
                     messages: data.messages
                 }).then(() => dispatch({ type: REMOVE_MESSAGE }))
