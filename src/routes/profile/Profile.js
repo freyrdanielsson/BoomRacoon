@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { firestoreConnect, useFirebase, isLoaded } from 'react-redux-firebase';
+import { firestoreConnect, useFirebase } from 'react-redux-firebase';
 
 import { setFunction } from '../../actions/header';
 
