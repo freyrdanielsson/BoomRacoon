@@ -1,5 +1,3 @@
-import api from '../api';
-
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const SEND_MESSAGE_FAILURE = 'SEND_MESSAGE_FAILURE';
 export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
@@ -36,7 +34,6 @@ export const fetchChats = () => {
                         return data
                     });
                     let concat = queryOneResult.concat(queryTwoResult);
-                    console.log(concat);
                     for(let i = 0; i < documents.length; i++) {
                         firestore.collection('conversations').doc(documents[i])
                         .onSnapshot((doc) => {
@@ -79,7 +76,6 @@ export const sendMessage = (conversationId, content) => {
 
 export const removeMessage = (conversationId, messageIndex) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
-        const firebase = getFirebase();
         const firestore = getFirestore();
         let collectionRef = firestore.collection('conversations').doc(conversationId)
         collectionRef.get()

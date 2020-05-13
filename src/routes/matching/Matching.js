@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { useFirebase } from 'react-redux-firebase';
+import { Button } from '@material-ui/core';
 
 import { setFunction } from '../../actions/header';
 
@@ -14,6 +15,7 @@ import './Matching.scss';
 function Matching(props) {
     const { profile } = props
     const [users, setUsers] = useState([]);
+    const [loadingUsers, setLoadingUsers] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [showDetail, setShowDetail] = useState(false);
 
@@ -21,6 +23,7 @@ function Matching(props) {
 
     useEffect(() => {
         const fetchUsers = async () => {
+            setLoadingUsers(true);
             firebase.firestore().collection('users')
                 .where('category', '==', profile.category)
                 .get().then((snapshot) => {
@@ -34,8 +37,9 @@ function Matching(props) {
                         });
                     });
                 }).catch(error => {
-                    console.log("Error getting users: ", error);
+                    console.error("Error getting users: ", error);
                 }).finally(() => {
+                    setLoadingUsers(false);
                 })
         }
 
@@ -116,6 +120,24 @@ function Matching(props) {
         <React.Fragment>
             {users[0] && !showPopup
                 && <Match onDetail={() => setShowDetail(true)} user={users[0].data} acceptUser={acceptUser} denyUser={denyUser} />
+            }
+
+            {users.length === 0 && !loadingUsers
+                && <div className="matching__empty">
+                    <p className="matching__empty-text">Oops! Looks like you ran out of contenders.</p>
+                    <p className="matching__empty-text">Head down to your profile and change the category to explore more users.</p>
+                    <p className="matching__empty-text">Or just lower your standards and:</p>
+                    <Button onClick={() => window.location.reload(false)} variant="contained" className="matching__empty-button">Try again!</Button>            </div>
+            }
+
+            {profile.category
+                ? <div className="matching__category">
+                    <p>Showing users with category:</p>
+                    <p className="matching__category-active">{profile.category}</p>
+                </div>
+                : <div className="matching__category">
+                    <p>To see other users, head down to your profile and select a category </p>
+                </div>
             }
         </React.Fragment>
     );

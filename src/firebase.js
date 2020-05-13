@@ -20,6 +20,5 @@ const config = {
 
 firebase.initializeApp(config);
 firebase.firestore();
-console.log("Initialized");
 
 export default firebase;

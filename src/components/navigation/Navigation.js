@@ -1,12 +1,16 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faCog, faComments, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faComments, faUser } from '@fortawesome/free-solid-svg-icons'
 import './Navigation.scss';
 
 export default function Navigation(props) {
     const [navbarSelect, setNavbarSelect] = useState(props.location.pathname);
+
+useEffect(() => {
+    setNavbarSelect(props.location.pathname)
+}, [props.location.pathname])
 
     const navigate = value => {
         props.history.push(value)

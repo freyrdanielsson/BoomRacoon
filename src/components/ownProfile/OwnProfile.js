@@ -19,7 +19,6 @@ export default function OwnProfile(props) {
         // To make a unique name for the image. Use uid instead of name.
         const fileName = file.lastModified + file.name;
         const filePath = firebase.auth().currentUser.uid + '/' + fileName;
-        console.log(filePath);
 
         return firebase.storage().ref(filePath).put(file).then((snapshot) => {
             return snapshot.ref.getDownloadURL().then((url) => {

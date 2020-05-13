@@ -1,15 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Button, Paper, Avatar } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { Button, Avatar } from '@material-ui/core';
+
 import './MatchPopup.scss';
 
 export function MatchPopup(props) {
     const { profile, user, keepSwiping, matchChat } = props;
-    console.log(profile, user);
-
 
     // Looks bad when desktop view is chosen due to absolute positioning
 
@@ -30,9 +26,6 @@ export function MatchPopup(props) {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-    }
-}
 
-export default withRouter(connect(mapStateToProps)(MatchPopup));
+
+export default withRouter((MatchPopup));

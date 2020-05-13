@@ -6,9 +6,6 @@ import './SignupForm.scss';
 import { signUpUser } from '../../actions/auth';
 
 export function SignupForm(props) {
-    console.log(props);
-    
-
     const [formInfo, setFormInfo] = useState(['', null, '', '']); // name, age, email, pwd
 
     const handleChange = (index, e)  => {
@@ -28,7 +25,7 @@ export function SignupForm(props) {
             <Container component="main" maxWidth="md">
                 <div className="paper-paper">
                     <div className="signup-image">
-                        <img src={require('../../assets/images/racoon.png')} />
+                        <img alt="" src={require('../../assets/images/racoon.png')} />
                     </div>
                     <Typography component="h1" variant="h5" className="signup-title">
                         SIGN UP

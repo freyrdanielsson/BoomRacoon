@@ -1,4 +1,4 @@
-import React, { Fragment, useDebugValue } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Switch, withRouter } from 'react-router-dom';
@@ -16,7 +16,6 @@ import Signup from './routes/signup/Signup';
 import Matching from './routes/matching/Matching';
 import Details from './routes/details/Details';
 import Profile from './routes/profile/Profile';
-import Categories from './routes/categories/Categories';
 import Messages from './routes/messages/Messages';
 import Conversation from './routes/conversation/Conversation';
 

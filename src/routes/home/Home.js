@@ -18,7 +18,7 @@ export function Home(props) {
     // Need to be authenticated else error
     async function getPic() {
         const pic = firebase.storage().ref().child('test/doggydogg.jpg').getDownloadURL();
-        console.log(pic);
+        console.info(pic)
     }
     getPic();
 

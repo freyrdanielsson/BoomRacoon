@@ -1,0 +1,32 @@
+@import '../../config.scss';
+
+.matching {
+    &__empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 50vh;
+        padding: $gutter;
+    }
+
+    &__empty-text {
+        margin: $gutter / 2 0;
+    }
+
+    &__empty-button {
+        background-color: #2C98F0 !important;
+        color: #fff !important;
+    }
+
+    &__category {
+        margin: $gutter  * 2;
+        border: 1px dashed #2C98F0;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    &__category-active {
+        font-weight: 700;
+    }
+}
