@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Button } from '@material-ui/core';
@@ -7,38 +7,21 @@ import { Carousel } from 'react-responsive-carousel';
 import './MatchDetails.scss';
 
 export function MatchDetails(props) {
+    const { user } = props;
+
+    useEffect(() => {
+        props.updateHeader(true);
+        return () => props.updateHeader(false);
+    });
 
     // http://react-responsive-carousel.js.org/storybook/?path=/story/01-basic--base
-
-    const user = {
-        name: "Ratman",
-        age: 25,
-        email: "ratman@ratman.com",
-        category: "Sports",
-        interests: ["Football", "Fighting"],
-        description: "RATMAN YO",
-        matchings: [],
-        conversations: [],
-        pics: [
-            {
-                order: 1, 
-                path: "M7IZgd47H1ZHqe6fgdYSQpcPvWr1/1586779775764ratatuoille-cinemareversilia.jpeg",
-                url: "https://firebasestorage.googleapis.com/v0/b/dm2518-project-matching.appspot.com/o/M7IZgd47H1ZHqe6fgdYSQpcPvWr1%2F1586779775764ratatuoille-cinemareversilia.jpeg?alt=media&token=0fd646d6-75be-4d58-aabb-20d008fcdb3f"
-            },
-            {
-                order: 2, 
-                path: "M7IZgd47H1ZHqe6fgdYSQpcPvWr1/1587672168261selena-gomez-pevitsa-portret-znamenitost.jpg",
-                url: "https://firebasestorage.googleapis.com/v0/b/dm2518-project-matching.appspot.com/o/M7IZgd47H1ZHqe6fgdYSQpcPvWr1%2F1587672168261selena-gomez-pevitsa-portret-znamenitost.jpg?alt=media&token=0951319d-7a8c-4169-ad54-8e3d0d96a7c5"
-            }
-        ]
-    }
 
     const myInterests = {
         interests: ["Football", "Tennis"]
     }
 
     let pictures = user.pics.map((picture, index) => {
-        return <div key={picture.url} className="picture-container"><img src={picture.url} className="match-image" alt={"Picture-" + (index+1)}></img></div>
+        return <div key={picture.url} className="picture-container"><img src={picture.url} className="match-image" alt={"Picture-" + (index + 1)}></img></div>
     })
 
     let interests = user.interests.map((interest) => {
@@ -58,7 +41,7 @@ export function MatchDetails(props) {
                         <h2>{user.name + ", " + user.age}</h2>
                     </div>
                     <div className="match-details-flex-2">
-                        
+
                     </div>
                 </div>
                 <div className="match-details-description">

@@ -3,23 +3,24 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { useFirebase } from 'react-redux-firebase';
 
-import './Matching.scss';
+import { setFunction } from '../../actions/header';
+
 import Match from '../../components/match/Match';
 import MatchDetails from '../../components/matchDetails/MatchDetails';
-
 import MatchPopup from '../../components/matchPopup/MatchPopup';
+
+import './Matching.scss';
 
 function Matching(props) {
     const { profile } = props
     const [users, setUsers] = useState([]);
-    const [loadingUsers, setLoadingUsers] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
+    const [showDetail, setShowDetail] = useState(false);
 
     const firebase = useFirebase();
 
     useEffect(() => {
         const fetchUsers = async () => {
-            setLoadingUsers(true)
             firebase.firestore().collection('users')
                 .where('category', '==', profile.category)
                 .get().then((snapshot) => {
@@ -35,15 +36,12 @@ function Matching(props) {
                 }).catch(error => {
                     console.log("Error getting users: ", error);
                 }).finally(() => {
-                    setLoadingUsers(false);
                 })
         }
 
         if (profile.isLoaded) {
             fetchUsers();
         }
-        console.log(profile.isLoaded, profile.category, firebase, profile.matchings);
-
     }, [profile.isLoaded, profile.category, firebase, profile.matchings]) // Careful using firebase as a dependency
 
     const denyUser = () => {
@@ -91,6 +89,13 @@ function Matching(props) {
         setUsers(users.splice(1, users.length));
     }
 
+    const updateHeader = (active) => {
+        const f = () => {
+            setShowDetail(false);
+        }
+        props.dispatch(setFunction(f, active));
+    }
+
     if (showPopup) {
         return (
             <React.Fragment>
@@ -99,10 +104,18 @@ function Matching(props) {
         );
     }
 
+    if (showDetail) {
+        return (
+            <React.Fragment>
+                <MatchDetails user={users[0].data} updateHeader={updateHeader} />
+            </React.Fragment>
+        );
+    }
+
     return (
         <React.Fragment>
             {users[0] && !showPopup
-                && <Match user={users[0].data} acceptUser={acceptUser} denyUser={denyUser} />
+                && <Match onDetail={() => setShowDetail(true)} user={users[0].data} acceptUser={acceptUser} denyUser={denyUser} />
             }
         </React.Fragment>
     );

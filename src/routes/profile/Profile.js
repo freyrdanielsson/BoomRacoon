@@ -6,10 +6,11 @@ import { firestoreConnect, useFirebase } from 'react-redux-firebase';
 
 import { setFunction } from '../../actions/header';
 
-import './Profile.scss';
 import OwnProfile from '../../components/ownProfile/OwnProfile';
 import ProfileForm from '../../components/profileForm/ProfileForm';
 import CategoryList from '../../components/categoryList/CategoryList';
+
+import './Profile.scss';
 
 export function Profile(props) {
     const [editMode, setEditMode] = useState(false);

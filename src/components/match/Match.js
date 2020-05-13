@@ -8,7 +8,7 @@ import './Match.scss';
 import { logOutUser } from '../../actions/auth';
 
 export function Match(props) {
-    const { user, denyUser, acceptUser } = props
+    const { user, denyUser, acceptUser, onDetail } = props
 
     const userImage = user.pics[0] ? user.pics[0].url : require('../../assets/images/tennis-woman.jpg');
 
@@ -18,7 +18,7 @@ export function Match(props) {
         <div className='match'>
 
             <Paper elevation={5} className="card-holder-match" >
-                <div className="match-image-container">
+                <div className="match-image-container" onClick={onDetail}>
                     <img src={userImage} className="match-image" alt=""></img>
                 </div>
                 <div className="match-info-container">
