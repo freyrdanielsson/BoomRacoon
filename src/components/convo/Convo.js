@@ -12,7 +12,13 @@ export function Convo(props) {
 
     useEffect(() => {
         scrollToBottom();
-    }, [])
+    })
+
+    function scrollToBottom() {
+        animateScroll.scrollToBottom({
+          containerId: "uselessPieceOfShit"
+        });
+    }
 
     const id = props.match.params.id;
     const [text, setText] = useState(''); // email, pwd
@@ -21,13 +27,9 @@ export function Convo(props) {
         if(text) {
             props.sendMessage(id, text);
             setText('');
+            document.getElementById('message-input').value = '';
+            document.getElementById("message-input").focus();
         }
-    }
-
-    function scrollToBottom() {
-        animateScroll.scrollToBottom({
-          containerId: "convo-messages"
-        });
     }
 
     let index = null;
@@ -39,7 +41,7 @@ export function Convo(props) {
     }
 
     let messages = index === null ? null : props.chatList[index].messages.map(message => {
-        return <li key={message.message_id} className={"message-bubble " + (message.sender_uid == props.uid ? "sent-by-user" : null)} onClick={() => scrollToBottom()}>{message.content}</li>
+        return <li key={message.message_id} className={"message-bubble " + (message.sender_uid == props.uid ? "sent-by-user" : null)}>{message.content}</li>
     })
 
     return (
@@ -63,6 +65,7 @@ const mapStateToProps = (state) => {
     console.log(state);
     return {
         chatList: state.chats.chatList,
+        randomnumber: state.chats.randomnumber,
         uid: state.firebase.auth.uid
     }
 }

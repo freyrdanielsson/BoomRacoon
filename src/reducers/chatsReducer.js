@@ -1,5 +1,6 @@
 const initState = {
-    chatList: []
+    chatList: [],
+    randomnumber: 0 // Ugly solution to cause MessageList/Convo to rerender
 }
 
 const chatsReducer = (state = initState, action) => {
@@ -36,7 +37,8 @@ const chatsReducer = (state = initState, action) => {
             }
             return {
                 ...state,
-                chatList: temp
+                chatList: temp,
+                randomnumber: Math.floor(Math.random() * 1000000)
             }
         default:
             return state

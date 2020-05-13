@@ -19,7 +19,7 @@ export function MessageList(props) {
         if(!chat.messages.length) {
             return (
                 <ListItem button className="new-match" key={chat.chatId}>
-                    <Link to={"/chat/" + chat.chatId}>
+                    <Link to={"/chat/" + chat.chatId} style={{ textDecoration: 'none', color: 'black' }}>
                         <Avatar alt={props.uid} src={require('../../assets/images/tennis-woman.jpg')} className="new-match-avatar" />
                         <ListItemText primary={chat.user_uid_one !== props.uid ? chat.user_uid_one : chat.user_uid_two} className="new-match-name" />
                     </Link>
@@ -31,12 +31,12 @@ export function MessageList(props) {
     let convoStarted = !props.chatList ? null : props.chatList.map(chat => {
         if(chat.messages.length) {
             return (
-                <Link to={"/chat/" + chat.chatId} key={chat.chatId}>
+                <Link to={"/chat/" + chat.chatId} key={chat.chatId} style={{ textDecoration: 'none', color: 'black' }}>
                     <ListItem button alignItems="flex-start" className="convo-match" >
                         <ListItemAvatar>
                             <Avatar alt={props.uid} src={require('../../assets/images/nature-woman.jpg')} className="convo-match-avatar" />
                         </ListItemAvatar>
-                        <ListItemText primary={chat.user_uid_one !== props.uid ? chat.user_uid_one : chat.user_uid_two} secondary={chat.messages[chat.messages.length-1].content} className="convo-match-text" />
+                        <ListItemText multiline primary={chat.user_uid_one !== props.uid ? chat.user_uid_one : chat.user_uid_two} secondary={ chat.messages[chat.messages.length-1].content + '\n' /* +  chat.messages[chat.messages.length-1].time.toDate().toString().split(" GMT")[0] */ } className="convo-match-text" />
                     </ListItem>
                 </Link>
             )
@@ -60,6 +60,7 @@ export function MessageList(props) {
 const mapStateToProps = (state) => {
     return {
         chatList: state.chats.chatList,
+        randomnumber: state.chats.randomnumber,
         uid: state.firebase.auth.uid
     }
 }
