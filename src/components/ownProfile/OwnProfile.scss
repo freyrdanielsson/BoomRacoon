@@ -1,32 +1,33 @@
-.profile {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0.5em;
-}
-.profile-image-container {
-    width: 100%;
-}
+@import '../../config.scss';
+
 .control-dots {
     padding: 0;
 }
+
 .profile-info {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
+
 .profile-info h2 {
     margin: 0 0 !important;
     font-weight: 500;
 }
+
 .profile-info h3 {
     margin: 0 0 !important;
     font-weight: 300;
 }
+
 .match-details-description {
-    margin-bottom: 0em;
+    margin: $gutter / 2 0;
     color: #737373;
 }
-.edit-profile-button, .set-first, .remove-pic {
+
+.edit-profile-button,
+.set-first,
+.remove-pic {
     border-radius: 100px !important;
     width: 3em;
     height: 3em;
@@ -34,32 +35,108 @@
     margin: 0 !important;
     margin-top: 0.5em !important;
 }
+
+.edit-profile-button {
+    margin: 0 !important;
+}
+
 .set-first {
     position: absolute !important;
     margin-left: 0.5em !important;
 }
+
 .remove-pic {
     position: absolute !important;
     margin-left: 4em !important;
     background-color: #F02C2C !important;
     color: white !important;
 }
-.edit-icon, .remove-icon {
+
+.edit-icon,
+.remove-icon {
     font-size: 1.5em;
 }
+
 .categories-container h4 {
     margin: 1em 0 0.5em;
 }
-.shared-interest, .unshared-interest, .add-interest {
+
+.shared-interest,
+.unshared-interest,
+.add-interest {
     color: white !important;
     margin: 0 0.25em 0.5em !important;
 }
+
 .shared-interest {
     background-color: #2C98F0 !important;
 }
+
 .unshared-interest {
     background-color: #7B7B7B !important;
 }
+
 .add-interest {
     background-color: #00D254 !important;
+}
+
+
+
+
+.profile {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5em;
+
+    &__interests {
+        border: 1px dashed #2C98F0;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    &__container {
+        margin-top: $gutter;
+    }
+
+    &__hidden {
+        display: none;
+    }
+
+    &__images {
+        display: flex;
+        width: 100%;
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &__image--add {
+        display: flex;
+        background-color: $color-green;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 6em;
+    }
+
+    &__image-container {
+        width: 100%;
+        height: 300px;
+    }
+
+    &__logout {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        margin-top: $gutter * 2;
+
+        &__button {
+            background-color: #ff5c33 !important;
+            color: #fff !important;
+        }
+    }
 }

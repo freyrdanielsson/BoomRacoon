@@ -1,17 +1,24 @@
-import React, {useState} from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { List, ListItem, ListItemText, Collapse } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { List, ListItem, ListItemText, Collapse, Button } from '@material-ui/core';
 import './CategoryList.scss';
 
-export function CategoryList(props) {
+export default function CategoryList(props) {
+    const { categories, profile, updateHeader } = props;
+    const [collapse, setCollapse] = useState([false, false, false]);
+
+    useEffect(() => {
+        updateHeader(true);
+        return () => updateHeader(false);
+    });
 
     // The paper tag and everything between should be a list of those objects that's generated when fetching people to match with
 
-    const sports = require('../../assets/images/sports.jpg');
-    const animals = require('../../assets/images/animals.jpg');
-    const entertainment = require('../../assets/images/entertainment.jpg');
-    const [collapse, setCollapse] = useState([false, false, false]);
+    const assets = {
+        Sports: require('../../assets/images/sports.jpg'),
+        Animals: require('../../assets/images/animals.jpg'),
+        Entertainment: require('../../assets/images/entertainment.jpg'),
+    }
+
 
     function changeCollapse(index) {
         let temp = [...collapse];
@@ -19,56 +26,57 @@ export function CategoryList(props) {
         setCollapse(temp);
     }
 
+    function handleCategoryClick(category, index) {
+        if (category === profile.category) {
+            return changeCollapse(index);
+        }
+    }
+
+    function changeCategory(e, category) {
+        e.stopPropagation();
+        setCollapse([false, false, false]);
+        props.changeCategory(category);
+    }
+
+    function changeInterest(e, interest) {
+        e.stopPropagation();
+        const idx = profile.interests.indexOf(interest);
+
+        if (idx < 0) {
+           return props.changeInterest([...profile.interests, interest]);
+        } else {
+            return props.changeInterest(profile.interests.filter(item => item !== interest))
+        }
+    }
+
     return (
         <div className='categories'>
 
-            <div className="head-category" style={{backgroundImage: "url(" + sports + ")"}} onClick={() => changeCollapse(0)}>
-                <div className="tint">
-                    <h1 className="category-title">Sports</h1>
-                </div>
-            </div>
-            <Collapse in={collapse[0]}>
-                <List className="sub-category-items">
-                    <ListItem button className="sub-category-item"><ListItemText primary="Tennis" className="sub-category-text"/></ListItem>
-                    <ListItem button className="sub-category-item"><ListItemText primary="Football" className="sub-category-text"/></ListItem>
-                    <ListItem button className="sub-category-item"><ListItemText primary="Fighting" className="sub-category-text"/></ListItem>
-                    <ListItem button className="sub-category-item"><ListItemText primary="Badminton" className="sub-category-text"/></ListItem>
-                    <ListItem button className="sub-category-item"><ListItemText primary="Volleyball" className="sub-category-text"/></ListItem>
-                    <ListItem button className="sub-category-item"><ListItemText primary="Workout" className="sub-category-text"/></ListItem>
-                    <ListItem button className="sub-category-item"><ListItemText primary="Running" className="sub-category-text"/></ListItem>
-                </List>
-            </Collapse>
-
-            <div className="head-category" style={{backgroundImage: "url(" + animals + ")"}} onClick={() => changeCollapse(1)}>
-                <div className="tint">
-                    <h1 className="category-title">Animals</h1>
-                </div>
-            </div>
-            <Collapse in={collapse[1]}>
-                <List className="sub-category-items">
-                    <ListItem button className="sub-category-item"><ListItemText primary="Dogs" className="sub-category-text"/></ListItem>
-                    <ListItem button className="sub-category-item"><ListItemText primary="Cats" className="sub-category-text"/></ListItem>
-                </List>
-            </Collapse>
-
-            <div className="head-category" style={{backgroundImage: "url(" + entertainment + ")"}} onClick={() => changeCollapse(2)}>
-                <div className="tint">
-                    <h1 className="category-title">Movies</h1>
-                </div>
-            </div>
-            <Collapse in={collapse[2]}>
-                <List className="sub-category-items">
-                    <ListItem button className="sub-category-item"><ListItemText primary="Singing" className="sub-category-text"/></ListItem>
-                    <ListItem button className="sub-category-item"><ListItemText primary="Movies" className="sub-category-text"/></ListItem>
-                </List>
-            </Collapse>
-        </div>
+            {Object.keys(categories).map((category, i) => {
+                return (
+                    <div key={categories[category].name}>
+                        <div className="head-category" style={{ backgroundImage: "url(" + assets[categories[category].name] + ")" }} onClick={() => handleCategoryClick(categories[category].name, i)}>
+                            <div className="tint">
+                                <h1 className="category-title">{categories[category].name}</h1>
+                                {categories[category].name !== profile.category
+                                    && <Button onClick={(e) => changeCategory(e, categories[category].name)} className="category-set">Set category</Button>
+                                }
+                            </div>
+                        </div>
+                        <Collapse in={collapse[i]}>
+                            <List className="sub-category-items">
+                                {categories[category].sub_categories.map(interest => {
+                                    return (
+                                        <ListItem key={interest} button className={`sub-category-item ${profile.interests.includes(interest) ? 'on' : ''}`}>
+                                            <ListItemText primary={interest} className="sub-category-text" onClick={(e) => changeInterest(e, interest)} />
+                                        </ListItem>
+                                    );
+                                })}
+                            </List>
+                        </Collapse>
+                    </div>
+                );
+            })}
+        </div >
     );
 }
-
-const mapStateToProps = (state) => {
-    return {
-    }
-}
-
-export default withRouter(connect(mapStateToProps)(CategoryList));

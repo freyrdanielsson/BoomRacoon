@@ -20,7 +20,9 @@ const config = {
   storageBucket: "dm2518-project-matching.appspot.com",
   messagingSenderId: "752684525992",
   appId: "1:752684525992:web:7cec7ffa7210049f45159d",
-  measurementId: "G-Q7P4XSH56P"
+  measurementId: "G-Q7P4XSH56P",
+  userProfile: 'users',
+  useFirestoreForProfile: true
 };
 
 const store = createStore(
@@ -33,7 +35,7 @@ const store = createStore(
 
 const rrfProps = {
   firebase,
-  config: config,
+  config,
   dispatch: store.dispatch,
   createFirestoreInstance,
 }
