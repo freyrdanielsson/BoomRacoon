@@ -18,7 +18,7 @@ export default function Navigation(props) {
         <BottomNavigation value={navbarSelect} className="navigation-bar">
             <BottomNavigationAction label="Matching" value="/matching" icon={<FontAwesomeIcon className="navigation-icon" icon={faHeart} />} onClick={() => navigate("/matching")} />} />
             <BottomNavigationAction label="Profile" value="/profile" icon={<FontAwesomeIcon className="navigation-icon" icon={faUser} />} onClick={() => navigate("/profile")} />} />
-            <BottomNavigationAction label="Messages" value="/messages" icon={<FontAwesomeIcon className="navigation-icon" icon={faComments} />} onClick={() => navigate("/messages")} />} />
+            <BottomNavigationAction label="Chat" value="/chat" icon={<FontAwesomeIcon className="navigation-icon" icon={faComments} />} onClick={() => navigate("/chat")} />} />
             <BottomNavigationAction label="Settings" value="/settings" icon={<FontAwesomeIcon className="navigation-icon" icon={faCog} />} onClick={() => navigate("/settings")} />} />
         </BottomNavigation>
     );
