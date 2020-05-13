@@ -7,6 +7,9 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import './MatchPopup.scss';
 
 export function MatchPopup(props) {
+    const { profile, user, keepSwiping, matchChat } = props;
+    console.log(profile, user);
+
 
     // Looks bad when desktop view is chosen due to absolute positioning
 
@@ -17,12 +20,12 @@ export function MatchPopup(props) {
             </div>
             <h1 className="boom">BOOM!</h1>
             <div className="match-avatars-flex">
-                <Avatar alt="Picture description" src={require('../../assets/images/boxing-boy.jpg')} className="match-success-avatar" />
-                <Avatar alt="Picture description" src={require('../../assets/images/tennis-woman.jpg')} className="match-success-avatar" />
+                <Avatar alt="Picture description" src={profile.pics[0].url} className="match-success-avatar" />
+                <Avatar alt="Picture description" src={user.pics[0].url} className="match-success-avatar" />
             </div>
-            <h2 className="matched-text">You have matched with<br /><b>Carolina!</b></h2>
-            <Button className="talk-now" variant="contained" color="primary" fullWidth>Talk right away!</Button>
-            <Button className="keep-swiping" variant="contained" fullWidth>Keep swiping</Button>
+            <h2 className="matched-text">You have matched with<br /><b>{user.name}</b></h2>
+            <Button onClick={matchChat} className="talk-now" variant="contained" color="primary" fullWidth>Talk right away!</Button>
+            <Button onClick={keepSwiping} className="keep-swiping" variant="contained" fullWidth>Keep swiping</Button>
         </div>
     );
 }

@@ -42,6 +42,7 @@ export const signUpUser = (newUser) => {
                 email: newUser[2],
                 pics: [],
                 matchings: [],
+                misMatchings: [],
                 interests: [],
                 conversations: []
             })
