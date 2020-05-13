@@ -6,6 +6,7 @@ import { useFirebase } from 'react-redux-firebase';
 import './Matching.scss';
 import Match from '../../components/match/Match';
 import MatchDetails from '../../components/matchDetails/MatchDetails';
+
 import MatchPopup from '../../components/matchPopup/MatchPopup';
 
 function Matching(props) {

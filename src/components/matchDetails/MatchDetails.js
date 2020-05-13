@@ -10,36 +10,63 @@ export function MatchDetails(props) {
 
     // http://react-responsive-carousel.js.org/storybook/?path=/story/01-basic--base
 
+    const user = {
+        name: "Ratman",
+        age: 25,
+        email: "ratman@ratman.com",
+        category: "Sports",
+        interests: ["Football", "Fighting"],
+        description: "RATMAN YO",
+        matchings: [],
+        conversations: [],
+        pics: [
+            {
+                order: 1, 
+                path: "M7IZgd47H1ZHqe6fgdYSQpcPvWr1/1586779775764ratatuoille-cinemareversilia.jpeg",
+                url: "https://firebasestorage.googleapis.com/v0/b/dm2518-project-matching.appspot.com/o/M7IZgd47H1ZHqe6fgdYSQpcPvWr1%2F1586779775764ratatuoille-cinemareversilia.jpeg?alt=media&token=0fd646d6-75be-4d58-aabb-20d008fcdb3f"
+            },
+            {
+                order: 2, 
+                path: "M7IZgd47H1ZHqe6fgdYSQpcPvWr1/1587672168261selena-gomez-pevitsa-portret-znamenitost.jpg",
+                url: "https://firebasestorage.googleapis.com/v0/b/dm2518-project-matching.appspot.com/o/M7IZgd47H1ZHqe6fgdYSQpcPvWr1%2F1587672168261selena-gomez-pevitsa-portret-znamenitost.jpg?alt=media&token=0951319d-7a8c-4169-ad54-8e3d0d96a7c5"
+            }
+        ]
+    }
+
+    const myInterests = {
+        interests: ["Football", "Tennis"]
+    }
+
+    let pictures = user.pics.map((picture, index) => {
+        return <div key={picture.url} className="picture-container"><img src={picture.url} className="match-image" alt={"Picture-" + (index+1)}></img></div>
+    })
+
+    let interests = user.interests.map((interest) => {
+        return <Button key={interest} variant="contained" className={myInterests.interests.includes(interest) ? "shared-interest" : "unshared-interest"}>{interest}</Button>
+    })
+
     return (
         <div className='match-details'>
             <div className="match-image-container">
                 <Carousel showArrows={false} showThumbs={false}>
-                    <div>
-                        <img src={require('../../assets/images/tennis-woman.jpg')} className="match-image" alt=""></img>
-                    </div>
-                    <div>
-                        <img src={require('../../assets/images/woman-doggy.jpg')} className="match-image" alt=""></img>
-                    </div>
+                    {pictures}
                 </Carousel>
             </div>
             <div className="match-details-container">
                 <div className="match-info-flex">
                     <div className="match-details-flex-1">
-                        <h2>Carolina, 26</h2>
+                        <h2>{user.name + ", " + user.age}</h2>
                     </div>
                     <div className="match-details-flex-2">
-                        <h3>Stockholm</h3>
+                        
                     </div>
                 </div>
                 <div className="match-details-description">
-                    <p>Looking for a tennis buddy, intermediate or higher!</p>
-                    {/*<p>Skill level: <b>6</b> | Your skill level: <b>4</b></p>*/}
+                    <p>{user.description}</p>
                 </div>
                 <div className="categories-container">
-                    <h4>CATEGORIES</h4>
-                    <Button variant="contained" className="shared-interest">TENNIS</Button>
-                    <Button variant="contained" className="unshared-interest">DOGS</Button>
-                    <Button variant="contained" className="unshared-interest">SINGING</Button>
+                    <h4>Category: {user.category.toUpperCase()}</h4>
+                    {interests}
                 </div>
             </div>
         </div>
