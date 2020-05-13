@@ -69,7 +69,7 @@ export function LoginForm(props) {
                         >
                             Log In
                         </Button>
-                        <Link href="#" className="sign-up-link" onClick={() => handleSignOut()}>
+                        <Link href="/signup" className="sign-up-link" onClick={() => handleSignOut()}>
                             No account? Sign up here!
                         </Link>
                     </form>

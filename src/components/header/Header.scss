@@ -3,7 +3,6 @@
 .header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: $gutter * 2;
 
     &__title {
         padding: $gutter / 4;
@@ -36,7 +35,6 @@
     width: 100%;
     max-width: 1400px;
     position: sticky !important;
-    margin-bottom: 0.5em;
 }
 .toolbar-bar {
     padding: 2px !important;
