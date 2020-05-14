@@ -13,7 +13,7 @@ import MatchPopup from '../../components/matchPopup/MatchPopup';
 import './Matching.scss';
 
 function Matching(props) {
-    const { profile, listeners } = props
+    const { profile } = props
     const [users, setUsers] = useState([]);
     const [loadingUsers, setLoadingUsers] = useState(false);
     const [showPopup, setShowPopup] = useState(false);

@@ -31,7 +31,7 @@ export function LoginForm(props) {
             <Container component="main" maxWidth="md">
                 <div className="paper-paper">
                     <div className="login-image">
-                        <img src={require('../../assets/images/racoon.png')} />
+                        <img alt="" src={require('../../assets/images/racoon.png')} />
                     </div>
                     <Typography component="h1" variant="h5" className="login-title">
                         LOG IN
