@@ -60,13 +60,12 @@ function Matching(props) {
         const myId = firebase.auth().currentUser.uid;
         const user = users[0];
 
-        // tell myself I have accepted the user
-
         // Check if user has accepted me
         if (user.data.matchings.includes(myId)) {
             // Launch popup
             setShowPopup(true);
         } else {
+            // tell myself I accept this user
             firebase.updateProfile({
                 matchings: [...profile.matchings, user.id]
             });
@@ -83,6 +82,7 @@ function Matching(props) {
         })
     }
 
+    // Go straight to messages after match
     const matchChat = () => {
         const myId = firebase.auth().currentUser.uid;
         const user = users[0];
@@ -98,6 +98,7 @@ function Matching(props) {
         })
     }
 
+    // Keep swiping after match
     const keepSwiping = () => {
         const myId = firebase.auth().currentUser.uid;
         const user = users[0];
@@ -118,6 +119,7 @@ function Matching(props) {
         props.dispatch(setFunction(f, active));
     }
 
+    // forget the users you have denied 
     const tryAgain = () => {
         firebase.updateProfile({
             misMatchings: []
