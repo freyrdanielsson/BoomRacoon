@@ -7,7 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 import './MatchDetails.scss';
 
 export function MatchDetails(props) {
-    const { user } = props;
+    const { user, profile } = props;
 
     useEffect(() => {
         props.updateHeader(true);
@@ -16,9 +16,7 @@ export function MatchDetails(props) {
 
     // http://react-responsive-carousel.js.org/storybook/?path=/story/01-basic--base
 
-    const myInterests = {
-        interests: ["Football", "Tennis"]
-    }
+    const myInterests = profile.interests;
 
     let pictures = user.pics.map((picture, index) => {
         return <div key={picture.url} className="picture-container"><img src={picture.url} className="match-image" alt={"Picture-" + (index + 1)}></img></div>

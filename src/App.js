@@ -10,7 +10,6 @@ import UserRoute from './components/userRoute/UserRoute';
 
 
 // import routes
-import Home from './routes/home/Home';
 import Login from './routes/login/Login';
 import Signup from './routes/signup/Signup';
 import Matching from './routes/matching/Matching';
@@ -45,7 +44,6 @@ function App(props) {
       <main className='app'>
         <Switch location={location}>
           {/* Home will never be accessable from navigation. For now I use it for debugging */}
-          <UserRoute exact path='/' authenticated={isAuthenticated} redirect='/login' component={Home} />
           <UserRoute exact path='/profile' authenticated={isAuthenticated} redirect='/login' component={Profile} />
           <UserRoute exact path='/matching' authenticated={isAuthenticated} redirect='/login' component={Matching} />
           <UserRoute exact path='/matching/:id' authenticated={isAuthenticated} redirect='/login' component={Details} />

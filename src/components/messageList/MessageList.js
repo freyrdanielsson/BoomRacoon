@@ -18,7 +18,7 @@ export function MessageList(props) {
             return (
                 <ListItem button className="new-match" key={chat.chatId}>
                     <Link to={"/chat/" + chat.chatId} style={{ textDecoration: 'none', color: 'black' }}>
-                        <Avatar alt={props.uid} src={require('../../assets/images/tennis-woman.jpg')} className="new-match-avatar" />
+                        <Avatar alt={props.uid} src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' className="new-match-avatar" />
                         <ListItemText primary={chat.user_uid_one !== props.uid ? chat.user_uid_one : chat.user_uid_two} className="new-match-name" />
                     </Link>
                 </ListItem>
@@ -33,7 +33,7 @@ export function MessageList(props) {
                 <Link to={"/chat/" + chat.chatId} key={chat.chatId} style={{ textDecoration: 'none', color: 'black' }}>
                     <ListItem button alignItems="flex-start" className="convo-match" >
                         <ListItemAvatar>
-                            <Avatar alt={props.uid} src={require('../../assets/images/nature-woman.jpg')} className="convo-match-avatar" />
+                            <Avatar alt={props.uid} src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' className="convo-match-avatar" />
                         </ListItemAvatar>
                         <ListItemText primary={chat.user_uid_one !== props.uid ? chat.user_uid_one : chat.user_uid_two} secondary={chat.messages[chat.messages.length - 1].content + '\n' /* +  chat.messages[chat.messages.length-1].time.toDate().toString().split(" GMT")[0] */} className="convo-match-text" />
                     </ListItem>
