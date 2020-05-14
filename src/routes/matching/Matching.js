@@ -13,7 +13,7 @@ import MatchPopup from '../../components/matchPopup/MatchPopup';
 import './Matching.scss';
 
 function Matching(props) {
-    const { profile } = props
+    const { profile, listeners } = props
     const [users, setUsers] = useState([]);
     const [loadingUsers, setLoadingUsers] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
@@ -24,21 +24,22 @@ function Matching(props) {
     useEffect(() => {
         const fetchUsers = async () => {
             setLoadingUsers(true);
+            const tmp = [];
+
             firebase.firestore().collection('users')
                 .where('category', '==', profile.category)
                 .get().then((snapshot) => {
                     snapshot.forEach((doc) => {
                         if (doc.id === firebase.auth().currentUser.uid) return; // me
                         if (profile.matchings.includes(doc.id)) return; // seen and said yes
-                        // if (profile.misMatchings.includes(doc.id)) return // seen and said nah
+                        if (profile.misMatchings.includes(doc.id)) return // seen and said nah
 
-                        setUsers(u => {
-                            return [...u, { data: doc.data(), id: doc.id }]
-                        });
+                        tmp.push({ data: doc.data(), id: doc.id })
                     });
                 }).catch(error => {
                     console.error("Error getting users: ", error);
                 }).finally(() => {
+                    setUsers(tmp);
                     setLoadingUsers(false);
                 })
         }
@@ -46,51 +47,68 @@ function Matching(props) {
         if (profile.isLoaded) {
             fetchUsers();
         }
-    }, [profile.isLoaded, profile.category, firebase, profile.matchings]) // Careful using firebase as a dependency
+
+    }, [firebase, profile]) // Careful using firebase as a dependency
 
     const denyUser = () => {
-        if (!profile.misMatchings.includes(users[0].id)) {
-            firebase.updateProfile({
-                misMatchings: [...profile.misMatchings, users[0].id]
-            });
-        }
-
-        setUsers(users.splice(1, users.length));
+        firebase.updateProfile({
+            misMatchings: [...profile.misMatchings, users[0].id]
+        });
     }
 
     const acceptUser = () => {
         const myId = firebase.auth().currentUser.uid;
-        const user = users[0]
+        const user = users[0];
 
         // tell myself I have accepted the user
-        firebase.updateProfile({
-            matchings: [...profile.matchings, user.id]
-        });
 
         // Check if user has accepted me
         if (user.data.matchings.includes(myId)) {
             // Launch popup
             setShowPopup(true);
-
-            // create conversation
-            return firebase.firestore().collection("conversations").doc().set({
-                messages: [],
-                user_uid_one: myId,
-                user_uid_two: user.id
-            }).catch(error => {
-                console.error("Error writing new conversetion: ", error);
+        } else {
+            firebase.updateProfile({
+                matchings: [...profile.matchings, user.id]
             });
         }
-        setUsers(users.splice(1, users.length));
+    }
+
+    const createConvo = (myId, userId) => {
+        return firebase.firestore().collection("conversations").doc().set({
+            messages: [],
+            user_uid_one: myId,
+            user_uid_two: userId
+        }).catch(error => {
+            console.error("Error writing new conversetion: ", error);
+        })
     }
 
     const matchChat = () => {
-        setUsers(users.splice(1, users.length));
-        props.history.push("/chat");
+        const myId = firebase.auth().currentUser.uid;
+        const user = users[0];
+
+        setShowPopup(false);
+
+        createConvo(myId, user.id).then(() => {
+            props.history.push("/chat");
+        }).then(() => {
+            firebase.updateProfile({
+                matchings: [...profile.matchings, user.id]
+            })
+        })
     }
 
     const keepSwiping = () => {
-        setUsers(users.splice(1, users.length));
+        const myId = firebase.auth().currentUser.uid;
+        const user = users[0];
+
+        setShowPopup(false);
+
+        createConvo(myId, user.id).then(() => {
+            firebase.updateProfile({
+                matchings: [...profile.matchings, user.id]
+            })
+        })
     }
 
     const updateHeader = (active) => {
@@ -100,7 +118,13 @@ function Matching(props) {
         props.dispatch(setFunction(f, active));
     }
 
-    if (showPopup) {
+    const tryAgain = () => {
+        firebase.updateProfile({
+            misMatchings: []
+        })
+    }
+
+    if (showPopup && !loadingUsers) {
         return (
             <React.Fragment>
                 <MatchPopup profile={profile} user={users[0].data} matchChat={matchChat} keepSwiping={keepSwiping} />
@@ -111,7 +135,7 @@ function Matching(props) {
     if (showDetail) {
         return (
             <React.Fragment>
-                <MatchDetails user={users[0].data} updateHeader={updateHeader} />
+                <MatchDetails user={users[0].data} profile={profile} updateHeader={updateHeader} />
             </React.Fragment>
         );
     }
@@ -127,7 +151,7 @@ function Matching(props) {
                     <p className="matching__empty-text">Oops! Looks like you ran out of contenders.</p>
                     <p className="matching__empty-text">Head down to your profile and change the category to explore more users.</p>
                     <p className="matching__empty-text">Or just lower your standards and:</p>
-                    <Button onClick={() => window.location.reload(false)} variant="contained" className="matching__empty-button">Try again!</Button>            </div>
+                    <Button onClick={tryAgain} variant="contained" className="matching__empty-button">Try again!</Button>            </div>
             }
 
             {profile.category

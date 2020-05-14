@@ -57,7 +57,7 @@ export function Convo(props) {
     return (
         <div className='convo'>
             <div className="convo-header">
-                <h2 className="convo-header-name">Julian</h2>
+                <h2 className="convo-header-name">Name</h2>
             </div>
             <ul className="convo-messages" id="convo-messages">
                 {messages}

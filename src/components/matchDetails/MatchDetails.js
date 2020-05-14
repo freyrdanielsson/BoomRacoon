@@ -16,14 +16,14 @@ export function MatchDetails(props) {
 
     // http://react-responsive-carousel.js.org/storybook/?path=/story/01-basic--base
 
-    const myInterests = profile.interests;
+    const myInterests = profile.interests || ['none'];
 
     let pictures = user.pics.map((picture, index) => {
         return <div key={picture.url} className="picture-container"><img src={picture.url} className="match-image" alt={"Picture-" + (index + 1)}></img></div>
     })
 
     let interests = user.interests.map((interest) => {
-        return <Button key={interest} variant="contained" className={myInterests.interests.includes(interest) ? "shared-interest" : "unshared-interest"}>{interest}</Button>
+        return <Button key={interest} variant="contained" className={myInterests.includes(interest) ? "shared-interest" : "unshared-interest"}>{interest}</Button>
     })
 
     return (
