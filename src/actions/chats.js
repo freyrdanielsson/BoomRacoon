@@ -34,16 +34,45 @@ export const fetchChats = () => {
                         return data
                     });
                     let concat = queryOneResult.concat(queryTwoResult);
-                    for(let i = 0; i < documents.length; i++) {
-                        firestore.collection('conversations').doc(documents[i])
-                        .onSnapshot((doc) => {
-                            const data = doc.data();
-                            const id = doc.id;
-                            data.chatId = id;
-                            dispatch({ type: UPDATE_CHATS, payload: [data] });
+                    
+                    firestore.collection('users').get()
+                    .then((snapshot) => {
+                        snapshot.docs.map(doc => {
+                            let user = doc.data();
+                            let userId = doc.id;
+                            for(let k = 0; k < concat.length; k++) {
+                                if ((concat[k].user_uid_one === userId || concat[k].user_uid_two === userId) && (userId !== uid)) {
+                                    concat[k].otherUser = {name: user.name, url: user.pics[0].url};
+                                }
+                            }
+                            return ""
                         })
-                    }
-                    dispatch({ type: FETCH_CHATS, payload: concat });
+                        for(let i = 0; i < documents.length; i++) {
+                            firestore.collection('conversations').doc(documents[i])
+                            .onSnapshot((doc) => {
+                                let data = doc.data();
+                                const id = doc.id;
+                                data.chatId = id;
+                                let query = null;
+                                if (uid === data.user_uid_one) {
+                                    query = firestore.collection('users').doc(data.user_uid_two)
+                                } else if (uid === data.user_uid_two) {
+                                    query = firestore.collection('users').doc(data.user_uid_one)
+                                }
+                                query.get()
+                                .then((doc) => {
+                                    let user = doc.data();
+                                    let userId = doc.id;
+                                    if (data.user_uid_one === userId || data.user_uid_two === userId) {
+                                        data.otherUser = {name: user.name, url: user.pics[0].url};
+                                    }
+                                }).then(() => {
+                                    dispatch({ type: UPDATE_CHATS, payload: [data] });
+                                })
+                            })
+                        }
+                        dispatch({ type: FETCH_CHATS, payload: concat });
+                    })
                 })
         })
         .catch(err => {
@@ -88,14 +117,3 @@ export const removeMessage = (conversationId, messageIndex) => {
             })
     }
 }
-
-
-
-/*
-firestore.collection('users').doc(data.user_uid_two).get()
-                    .then((snapshot) => {
-                            const userData = snapshot.data();
-                            data.otherUser = { name: userData.name, profilePic: "urllll" };
-                            console.log(data)
-                            return data
-                    })*/
