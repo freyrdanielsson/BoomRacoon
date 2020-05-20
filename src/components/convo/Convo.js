@@ -57,7 +57,7 @@ export function Convo(props) {
     return (
         <div className='convo'>
             <div className="convo-header">
-                <h2 className="convo-header-name">Name</h2>
+                <h2 className="convo-header-name">{props.chatList[index] ? props.chatList[index].otherUser.name : "Unknown"}</h2>
             </div>
             <ul className="convo-messages" id="convo-messages">
                 {messages}
@@ -65,7 +65,7 @@ export function Convo(props) {
             
             <div className="input-flex">
                 <TextField id="message-input" className="message-input" label="Your message..." onChange={(e) => setText(e.target.value)} />
-                <Button variant="contained" className="message-send" onClick={() => handleSend()}>Send</Button>
+                <Button variant="contained" className="message-send" onClick={() => handleSend()} disabled={props.chatList[index] ? false : true}>Send</Button>
             </div>
         </div>
     );
