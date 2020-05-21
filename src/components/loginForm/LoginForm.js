@@ -61,6 +61,7 @@ export function LoginForm(props) {
                             autoComplete="current-password"
                             onChange={(e) => handleChange(1, e)}
                         />
+                        <p className="auth-error-login">{props.authError ? props.authError : null}</p>
                         <Button
                             fullWidth
                             variant="contained"
@@ -79,6 +80,11 @@ export function LoginForm(props) {
     );
 }
 
+const mapStateToProps = (state) => {
+    return {
+        authError: state.auth.authError
+    }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -87,4 +93,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default withRouter(connect(() => { return {} }, mapDispatchToProps)(LoginForm));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));

@@ -76,6 +76,7 @@ export function SignupForm(props) {
                             autoComplete="current-password"
                             onChange={(e) => handleChange(3, e)}
                         />
+                        <p className="auth-error-signup">{props.authError ? props.authError : null}</p>
                         <Button
                             fullWidth
                             variant="contained"
@@ -96,6 +97,7 @@ export function SignupForm(props) {
 
 const mapStateToProps = (state) => {
     return {
+        authError: state.auth.authError
     }
 }
 const mapDispatchToProps = (dispatch) => {
