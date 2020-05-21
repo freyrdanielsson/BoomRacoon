@@ -1,5 +1,5 @@
-export const SIGNUP_SUCCESS = 'SIGN_UP_SUCCESS';
-export const SIGNUP_FAILURE = 'SIGN_UP_FAILURE';
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -39,9 +39,9 @@ export const signUpUser = (newUser) => {
                 misMatchings: [],
                 interests: [],
                 conversations: []
+            }).then(() => {
+                dispatch({ type: SIGNUP_SUCCESS })
             })
-        }).then(() => {
-            dispatch({ type: SIGNUP_SUCCESS })
         }).catch(err => {
             dispatch({ type: SIGNUP_FAILURE, err })
         })
